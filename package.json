@@ -8,15 +8,29 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^0.26.0",
     "next": "12.0.10",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2",
+    "redux-devtools-extension": "^2.13.9",
+    "styled-components": "^5.3.3",
+    "styled-normalize": "^8.0.7",
+    "typesafe-actions": "^5.1.0",
+    "typescript": "4.5.5"
   },
   "devDependencies": {
     "@types/node": "17.0.17",
     "@types/react": "17.0.39",
+    "@types/react-redux": "^7.1.22",
+    "@types/styled-components": "^5.1.22",
+    "@typescript-eslint/eslint-plugin": "^5.11.0",
+    "@typescript-eslint/parser": "^5.11.0",
     "eslint": "8.9.0",
     "eslint-config-next": "12.0.10",
-    "typescript": "4.5.5"
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.5.1"
   }
 }
