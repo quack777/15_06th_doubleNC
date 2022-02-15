@@ -5,7 +5,7 @@ import Nav from '../nav/Nav';
 
 const CategoriesTemplate: FC = ({ children }) => {
   const router = useRouter();
-  console.log('categories router', router);
+
   return (
     <Container>
       <Nav name={router.query.categoryName} />
