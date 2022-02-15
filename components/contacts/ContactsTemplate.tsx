@@ -5,7 +5,7 @@ import Nav from '../nav/Nav';
 const ContactsTemplate: React.FC = ({ children }) => {
   return (
     <Container>
-      <Nav />
+      <Nav name="고객센터" />
       {children}
     </Container>
   );
