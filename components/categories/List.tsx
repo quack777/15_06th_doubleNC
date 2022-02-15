@@ -12,14 +12,12 @@ const List: FC = () => {
     const getApi = () => {
       axios.get(`https://api2.ncnc.app/con-category1s/${router.query.id}/nested`).then((res) => {
         setData(res.data.conCategory1);
-        console.log(res.data.conCategory1);
       });
     };
     getApi();
   }, []);
 
   if (data) {
-
     return (
       <>
         <Container>
