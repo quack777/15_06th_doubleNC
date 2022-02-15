@@ -14,10 +14,10 @@ interface BrandType {
 
 import moneyAddComma from '../utils/moneyAddComma';
 
-
 const BrandsForm: React.FC = () => {
   const router = useRouter();
-  const items: BrandType[] = JSON.parse(router.query.data) as string;
+  const stringData = router.query.data as string;
+  const items: BrandType[] = JSON.parse(stringData);
 
   const CalculateDiscountRate = (original: number, minSelling: number): string => {
     return (((original - minSelling) * 100) / original).toFixed(1);
@@ -38,8 +38,8 @@ const BrandsForm: React.FC = () => {
                   <p>{data.name}</p>
                   <Price>
                     <p>{`${CalculateDiscountRate(data.originalPrice, data.minSellingPrice)}%`}</p>
-                    <p>{`${moneyAddComma(data.minSellingPrice)}원`}</p>
-                    <p>{`${moneyAddComma(data.originalPrice)}원`}</p>
+                    <p>{`${moneyAddComma(String(data.minSellingPrice))}원`}</p>
+                    <p>{`${moneyAddComma(String(data.originalPrice))}원`}</p>
                   </Price>
                 </TextBox>
               </div>
