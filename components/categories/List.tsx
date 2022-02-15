@@ -38,7 +38,7 @@ const List: React.FC = () => {
       </Container>
     );
   } else {
-    return <div></div>;
+    return null;
   }
 };
 

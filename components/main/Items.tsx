@@ -26,15 +26,15 @@ const Items: FC = () => {
           <Link key={data.id} href={{ pathname: '/items/[id]' }} as={`/items/${data.id}`}>
             <ItemBox>
               <img src={data.imageUrl} alt="상품이미지" />
-              <div>
+              <TextBox>
                 <p>{data.conCategory2.name}</p>
                 <p>{data.name}</p>
-                <div>
+                <Price>
                   <p>{`${data.discountRate}%`}</p>
                   <p>{data.ncSellingPrice}</p>
                   <p>{data.originalPrice}</p>
-                </div>
-              </div>
+                </Price>
+              </TextBox>
             </ItemBox>
           </Link>
         ))}
@@ -51,7 +51,58 @@ const Header = styled.header`
   margin-bottom: 14px;
   margin-left: 17px;
 `;
+const TextBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
 
+  & > p:nth-child(1) {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: #808080;
+  }
+  & > p:nth-child(2) {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+  }
+`;
+const Price = styled.div`
+  display: flex;
+  flex-direction: row;
+  & > p:nth-child(1) {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #ff5757;
+    margin-right: 9px;
+  }
+  & > p:nth-child(2) {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    margin-right: 6px;
+  }
+  & > p:nth-child(3) {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+    text-decoration-line: line-through;
+
+    color: #808080;
+  }
+`;
 const Alert = styled.p`
   margin: 0;
   color: #ff5757;

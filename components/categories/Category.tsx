@@ -13,10 +13,13 @@ const Category: FC = () => {
   const categoryButton = (e: React.MouseEventHandler<HTMLLIElement>): void => {
     router.push(`/categories/${e.target.id}`);
   };
+  console.log(data);
   return (
     <div className="Category">
       {data?.map((data) => (
-        <p onClick={categoryButton}>{data}</p>
+        <p id={data.id} onClick={categoryButton}>
+          {data}
+        </p>
       ))}
     </div>
   );
