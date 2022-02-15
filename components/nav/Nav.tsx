@@ -6,18 +6,18 @@ interface ButtonType {
   path: string;
 }
 interface NavProps {
-  name: string | undefined;
+  name: string | string[] | undefined;
   showMenu?: boolean;
-  SetShowMenu?: any;
+  setShowMenu?: any;
 }
-const Nav = ({ name, showMenu, SetShowMenu }: NavProps) => {
+const Nav = ({ name, showMenu, setShowMenu }: NavProps) => {
   const router = useRouter();
   const path = router.asPath;
   console.log('deploy ci= add');
 
   const goToPath = () => {
     if (path === '/') {
-      SetShowMenu(!showMenu);
+      setShowMenu(!showMenu);
     } else {
       router.back();
     }

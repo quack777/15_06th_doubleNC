@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 import OptionBox from './OptionBox';
 import Modal from '../common/Modal';
 import { regExp } from '../../utils/regExp';
-import { getTarget } from '../../utils/getTarget';
 import type { ItemInfoType } from '../../pages/api/items.api';
 import type { Option } from '../../pages/api/items.api';
 
@@ -17,57 +16,55 @@ interface ContainerStyleType {
 
 interface OptionButtonStyleType {
   messageColumn: number | undefined;
-  isShowing: boolean
-  selectedOption: Option | undefined
+  isShowing: boolean;
+  selectedOption: Option | undefined;
 }
 
 interface SelectedOptionBoxStyleType {
-  selectedOption: Option | undefined
+  selectedOption: Option | undefined;
 }
 
-
-
-const ItemsForm: React.FC<ItemsFormProps> = ({itemInfo}: ItemsFormProps) => {
+const ItemsForm: React.FC<ItemsFormProps> = ({ itemInfo }: ItemsFormProps) => {
   const [isShowing, setIsShowing] = useState<boolean>(false);
   const [messageColumn, setMessageColumn] = useState<number | undefined>(0);
   const [options, setOptions] = useState<Option[] | null>(null);
   const [selectedOption, setSelectedOption] = useState<Option | undefined>();
-  
+
   const storeCheckedOption = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-    const target = e.target as HTMLLIElement
-    if(!target.id) return;
+    const target = e.target as HTMLLIElement;
+    if (!target.id) return;
     const targetOption = options?.find((_, index) => String(index) === target.id);
     setSelectedOption(targetOption);
     setIsShowing(!isShowing);
-  }
+  };
 
   const showModal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     setIsShowing(!isShowing);
-  }
+  };
 
   const parseMessage = regExp(itemInfo.warning);
 
   useEffect(() => {
-    if(itemInfo.warning) {      
+    if (itemInfo.warning) {
       const messageColumn = parseMessage && parseMessage[0].length + parseMessage[1].length + parseMessage[2].length;
 
       setMessageColumn(messageColumn);
     }
   }, [itemInfo.warning]);
-  
+
   useEffect(() => {
-    if(itemInfo.options) {
+    if (itemInfo.options) {
       setOptions(itemInfo.options);
     }
   }, [itemInfo.options]);
 
   return (
     <Container messageColumn={messageColumn}>
-      <Modal isShowing={isShowing} hide={setIsShowing}/>
+      <Modal isShowing={isShowing} hide={setIsShowing} />
       <ItemFrontInfoContainer>
         <ItemThumbnail>
-          <img alt="item-img" className="item-img" src={itemInfo.imageUrl}/>
+          <img alt="item-img" className="item-img" src={itemInfo.imageUrl} />
         </ItemThumbnail>
         <ItemSubInfoContainer>
           <div className="brand">{itemInfo.brand}</div>
@@ -80,48 +77,50 @@ const ItemsForm: React.FC<ItemsFormProps> = ({itemInfo}: ItemsFormProps) => {
         </ItemSubInfoContainer>
       </ItemFrontInfoContainer>
       <ItemBottomInfoContainer>
-        {
-          parseMessage && parseMessage.map((messages: string[], index) => {
+        {parseMessage &&
+          parseMessage.map((messages: string[], index) => {
             return (
-            <NoteInfoContainer key={index}>
-              <NoteInfoTitle>{messages[0]}</NoteInfoTitle>
+              <NoteInfoContainer key={index}>
+                <NoteInfoTitle>{messages[0]}</NoteInfoTitle>
                 <NoteInfoList>
-                  {
-                    messages.map((message: string, index) => {
-                      if(index === 0) return;
-                      return <NoteInfo key={index}>{message}</NoteInfo>
-                    })
-                  }
+                  {messages.map((message: string, index) => {
+                    if (index === 0) return;
+                    return <NoteInfo key={index}>{message}</NoteInfo>;
+                  })}
                 </NoteInfoList>
-            </NoteInfoContainer>
-            )
-          })
-        }
+              </NoteInfoContainer>
+            );
+          })}
       </ItemBottomInfoContainer>
       <SelectedOptionBox selectedOption={selectedOption}>
-          <ViewBox>
-            <Info>
-              {`${selectedOption?.expireAt.toString().split('T')[0]} / ${selectedOption?.sellingPrice }`}
-            </Info>
-            <EditButton onClick={showModal}/>
-          </ViewBox>
-        </SelectedOptionBox>
-      <OptionButton isShowing={isShowing} onClick={showModal} messageColumn={messageColumn} selectedOption={selectedOption}>
-        {
-          isShowing ? '구매하기' : selectedOption ? '구매하기' : '옵션 선택하기'
-        }
+        <ViewBox>
+          <Info>{`${selectedOption?.expireAt.toString().split('T')[0]} / ${selectedOption?.sellingPrice}`}</Info>
+          <EditButton onClick={showModal} />
+        </ViewBox>
+      </SelectedOptionBox>
+      <OptionButton
+        isShowing={isShowing}
+        onClick={showModal}
+        messageColumn={messageColumn}
+        selectedOption={selectedOption}
+      >
+        {isShowing ? '구매하기' : selectedOption ? '구매하기' : '옵션 선택하기'}
       </OptionButton>
-     <OptionBox isShowing={isShowing} messageColumn={messageColumn} options={options} storeCheckedOption={storeCheckedOption}/>
-  </Container>
-  )
+      <OptionBox
+        isShowing={isShowing}
+        messageColumn={messageColumn}
+        options={options}
+        storeCheckedOption={storeCheckedOption}
+      />
+    </Container>
+  );
 };
 
 const Container = styled.form<ContainerStyleType>`
   position: relative;
   max-height: 692.81px;
   background-color: #ffffff;
-  overflow: ${({ messageColumn }) => messageColumn && messageColumn > 12 ? 'scroll' : 'hidden'};
-
+  overflow: ${({ messageColumn }) => (messageColumn && messageColumn > 12 ? 'scroll' : 'hidden')};
 `;
 
 const ItemFrontInfoContainer = styled.div`
@@ -139,7 +138,7 @@ const ItemThumbnail = styled.figure`
   padding: 12px;
   border: none;
   border-radius: 5px;
-  background-color: #F1F3F4;
+  background-color: #f1f3f4;
 
   & .item-img {
     max-width: 70px;
@@ -183,7 +182,7 @@ const PriceViewContainer = styled.div`
     font-size: 18px;
     font-weight: 500;
     line-height: 19px;
-    color: #FF5757;
+    color: #ff5757;
   }
 
   & .countPrice {
@@ -197,7 +196,7 @@ const PriceViewContainer = styled.div`
     font-size: 14px;
     line-height: 17px;
     color: #808080;
-    text-decoration : line-through;
+    text-decoration: line-through;
   }
 `;
 
@@ -225,7 +224,7 @@ const NoteInfoList = styled.ul`
 
 const NoteInfo = styled.li`
   margin-bottom: 4.31px;
-  
+
   font-size: 12px;
   font-weight: 400;
   line-height: 17px;
@@ -238,18 +237,18 @@ const NoteInfo = styled.li`
 `;
 
 const SelectedOptionBox = styled.div<SelectedOptionBoxStyleType>`
-  visibility: ${({ selectedOption }) => selectedOption ? 'visible' : 'hidden'};
+  visibility: ${({ selectedOption }) => (selectedOption ? 'visible' : 'hidden')};
   margin-top: 40px;
   padding: 17px;
-  border-top: 1px solid #F1F3F4;
-  background-color: #FFFFFF;
+  border-top: 1px solid #f1f3f4;
+  background-color: #ffffff;
 `;
 
 const ViewBox = styled.div`
   position: relative;
-  ${({theme}) => theme.flexMinin('row', 'space-between', 'center')};
+  ${({ theme }) => theme.flexMinin('row', 'space-between', 'center')};
   padding: 8px 17px;
-  background-color: #F1F3F4;
+  background-color: #f1f3f4;
   border-radius: 5px;
 `;
 
@@ -270,10 +269,11 @@ const EditButton = styled.button`
 
 const OptionButton = styled.button<OptionButtonStyleType>`
   position: relative;
-  margin-top: ${({ messageColumn }) => messageColumn && messageColumn > 12 ? '56px' : '89px'};
-  padding: ${({ isShowing, selectedOption }) => isShowing ? '23px 160px 40px 159px' : selectedOption ? '23px 160px 40px 159px' : '23px 142px 40px 142px'};
+  margin-top: ${({ messageColumn }) => (messageColumn && messageColumn > 12 ? '56px' : '89px')};
+  padding: ${({ isShowing, selectedOption }) =>
+    isShowing ? '23px 160px 40px 159px' : selectedOption ? '23px 160px 40px 159px' : '23px 142px 40px 142px'};
   border: none;
-  background-color: ${({ isShowing }) => isShowing ? '#CCCCCC' : '#FF5757'};
+  background-color: ${({ isShowing }) => (isShowing ? '#CCCCCC' : '#FF5757')};
   text-align: center;
   font-size: 14px;
   font-weight: 500;

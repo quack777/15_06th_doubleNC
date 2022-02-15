@@ -5,7 +5,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 const List: FC = () => {
-  const [data, setData] = useState('');
+  const [data, setData] = useState<any>('');
   const router = useRouter();
 
   useEffect(() => {

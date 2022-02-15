@@ -15,10 +15,10 @@ const ContactsForm: React.FC = () => {
     question: string;
     answer: string;
   };
-  const [qatypeData, setQatypeData] = useState<QaType>();
-  const [qnAdata, setQnAData] = useState<QnA>();
-  const [idNumber, setIdNumber] = useState<number>(1);
-  const [targetNum, setTargetNum] = useState();
+  const [qatypeData, setQatypeData] = useState<any>();
+  const [qnAdata, setQnAData] = useState<any>();
+  const [idNumber, setIdNumber] = useState<any>(1);
+  const [targetNum, setTargetNum] = useState<any>();
 
   useEffect(() => {
     const getApi = async () => {
@@ -31,7 +31,7 @@ const ContactsForm: React.FC = () => {
   useEffect(() => {
     if (!qatypeData) return;
     const getQnAApi = async () => {
-      const { data } = await getContactQnA([idNumber]);
+      const { data } = await getContactQnA(idNumber);
       setQnAData(data.qas);
     };
     getQnAApi();
@@ -79,7 +79,7 @@ const ContactsForm: React.FC = () => {
           </Selecter>
         </SelectContainer>
         <QnAContainer>
-          {qnAdata.map((app: string) => {
+          {qnAdata.map((app: QnA) => {
             return (
               <>
                 <QnAQuestion
@@ -175,12 +175,12 @@ const Selecter = styled.div`
     cursor: pointer;
   }
 `;
-const SelecterPurchase = styled.div`
+const SelecterPurchase = styled.div<{ idNumber: number }>`
   color: ${(props) => (props.idNumber === 1 ? '#FF5757' : '#808080')};
   border-bottom: ${(props) => (props.idNumber === 1 ? '2px' : '0px')} solid
     ${(props) => (props.idNumber === 1 ? '#FF5757' : '#808080')};
 `;
-const SelecterSell = styled.div`
+const SelecterSell = styled.div<{ idNumber: number }>`
   color: ${(props) => (props.idNumber === 2 ? '#FF5757' : '#808080')};
   border-bottom: ${(props) => (props.idNumber === 2 ? '2px' : '0px')} solid
     ${(props) => (props.idNumber === 2 ? '#FF5757' : '#808080')};
