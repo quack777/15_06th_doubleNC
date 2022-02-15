@@ -14,10 +14,6 @@ const List: React.FC = () => {
     });
   };
 
-  const ClickBrand = (e: React.MouseEventHandler<HTMLLIElement>): void => {
-    console.log('>>>>>>', e.target);
-    router.push(`../brands/${e.target.id}`);
-  };
   useEffect(() => {
     getApi();
   }, [router.query.id]);

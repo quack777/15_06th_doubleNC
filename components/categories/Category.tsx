@@ -7,14 +7,16 @@ const Category: FC = () => {
 
   useEffect(() => {
     console.log(router);
-    //setData(router.query.sendData);
+    setData(router.query.sendData);
     console.log('AA');
   });
-
+  const categoryButton = (e: React.MouseEventHandler<HTMLLIElement>): void => {
+    router.push(`/categories/${e.target.id}`);
+  };
   return (
     <div className="Category">
       {data?.map((data) => (
-        <p>{data}</p>
+        <p onClick={categoryButton}>{data}</p>
       ))}
     </div>
   );
