@@ -27,7 +27,7 @@ const ContactsMenu = ({ showMenu, SetShowMenu }: PropsType) => {
 };
 const TopBlink = styled.div`
   height: 20px;
-  margin-bottom: -20px;
+
   background-color: #ffffff;
 `;
 

@@ -53,6 +53,7 @@ const Container = styled.div`
   flex-direction: row;
   position: relative;
   width:100%;
+  cursor:pointer;
   img {
     width: 100%;
     height: 141px;
@@ -67,6 +68,7 @@ const SlideButton = styled.button`
   bottom: 100px;
   padding: 0;
   z-index: 3;
+  cursor: pointer;
 
   font-family: Roboto;
   font-style: normal;
