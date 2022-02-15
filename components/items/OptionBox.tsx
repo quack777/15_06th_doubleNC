@@ -2,17 +2,17 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 interface OptionBoxTypeProps {
-    test: boolean
+    isShowing: boolean
 }
 
 interface ContainerTypeStyle {
-    test: boolean
+    isShowing: boolean
 }
 
-const OptionBox: React.FC<OptionBoxTypeProps> = ({test}: OptionBoxTypeProps) => {
-    console.log(test);
+const OptionBox: React.FC<OptionBoxTypeProps> = ({isShowing}: OptionBoxTypeProps) => {
+    
     return (
-        <Container test={test}>
+        <Container isShowing={isShowing}>
         <Guide>옵션 선택하기</Guide>
         <OptionList>
           <Option>
@@ -78,11 +78,11 @@ const Container = styled.div<ContainerTypeStyle>`
     background-color: #ffffff;
     text-align: start;
     cursor: pointer;
-    z-index: 999;
+    z-index: 1000;
     transform: translateY(0);
-    transition: 0.4s ease-in-out;
+    transition: 0.3s ease-in-out;
 
-    ${({test}) => test && css`
+    ${({isShowing}) => isShowing && css`
         transform: translateY(-334px);
         visibility: visible;
     `}

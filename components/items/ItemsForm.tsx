@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import OptionBox from './OptionBox';
+import Modal from '../common/Modal';
 
 const ItemsForm: React.FC = () => {
-  const [test, setTest] = useState<boolean>(false);
+  const [isShowing, setIsShowing] = useState<boolean>(false);
 
   const showModal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    setTest(!test);
+    setIsShowing(!isShowing);
   }
 
   return (
     <Container>
+      <Modal isShowing={isShowing} hide={setIsShowing}/>
       <ItemFrontInfoContainer>
         <ItemThumbnail>
           <img alt="item-img" className="item-img" src='/images/item-thumbnail.jpg'/>
@@ -44,7 +46,7 @@ const ItemsForm: React.FC = () => {
         </NoteInfoContainer>
       </ItemBottomInfoContainer>
       <OptionButton onClick={showModal}>옵션 선택하기</OptionButton>
-     <OptionBox test={test}/>
+     <OptionBox isShowing={isShowing}/>
   </Container>
   )
 };
@@ -57,10 +59,13 @@ const Container = styled.form`
 `;
 
 const ItemFrontInfoContainer = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   padding: 17px;
   border-top: 2px solid #eee;
+  background-color: #ffffff;
+  z-index: 1001;
 `;
 
 const ItemThumbnail = styled.figure`
@@ -177,7 +182,7 @@ const OptionButton = styled.button`
   line-height: 19.2px;
   color: #ffffff;
   cursor: pointer;
-  z-index: 1000;
+  z-index: 1001;
 `;
 
 export default ItemsForm;
