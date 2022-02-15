@@ -5,15 +5,15 @@ import ContactsMenu from '../contacts/ContactsMenu';
 
 interface PropsType {
   showMenu: boolean;
-  SetShowMenu: boolean;
+  setShowMenu: any;
   childern?: React.ReactNode;
 }
 
-const MainTemplate: React.FC<PropsType> = ({ showMenu, SetShowMenu, children }) => {
+const MainTemplate: React.FC<PropsType> = ({ showMenu, setShowMenu, children }) => {
   return (
     <Container>
-      <ContactsMenu showMenu={showMenu} SetShowMenu={SetShowMenu} />
-      <Nav name="니콘내콘" showMenu={showMenu} SetShowMenu={SetShowMenu} />
+      <ContactsMenu showMenu={showMenu} setShowMenu={setShowMenu} />
+      <Nav name="니콘내콘" showMenu={showMenu} setShowMenu={setShowMenu} />
       {children}
     </Container>
   );

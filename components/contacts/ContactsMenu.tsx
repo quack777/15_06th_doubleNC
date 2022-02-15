@@ -4,15 +4,15 @@ import styled, { css, keyframes } from 'styled-components';
 import Nav from '../nav/Nav';
 
 interface PropsType {
-  showMenu: boolean;
-  SetShowMenu: boolean;
+  showMenu: any;
+  setShowMenu: boolean;
 }
 
-const ContactsMenu = ({ showMenu, SetShowMenu }: PropsType) => {
+const ContactsMenu = ({ showMenu, setShowMenu }: PropsType) => {
   return (
     <Container showMenu={showMenu}>
       <TopBlink />
-      <Nav name="마이페이지" showMenu={showMenu} SetShowMenu={SetShowMenu} />
+      <Nav name="마이페이지" showMenu={showMenu} setShowMenu={setShowMenu} />
       <Link href="/contacts">
         <Contacts>
           <p>고객센터</p>
@@ -27,7 +27,6 @@ const ContactsMenu = ({ showMenu, SetShowMenu }: PropsType) => {
 };
 const TopBlink = styled.div`
   height: 20px;
-
   background-color: #ffffff;
 `;
 
