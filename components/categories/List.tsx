@@ -21,7 +21,7 @@ const List: React.FC = () => {
   }, [router.query.id]);
 
   if (data.conCategory1) {
-    console.log(data.conCategory1.conCategory2s);
+    // console.log(data.conCategory1.conCategory2s);
     return (
       <>
         <Container>
