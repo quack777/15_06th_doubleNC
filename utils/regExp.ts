@@ -13,7 +13,6 @@ export function regExp(str: string): undefined | string[][] {
     let newParseStr = [];
     let tmpArr: string[] = [];
     let prevWaringTitle: string = '';
-    console.log(targetStr);
 
     let pt = 0;
 
