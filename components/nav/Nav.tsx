@@ -13,6 +13,7 @@ interface NavProps {
 const Nav = ({ name, showMenu, SetShowMenu }: NavProps) => {
   const router = useRouter();
   const path = router.asPath;
+  console.log('deploy ci= add');
 
   const goToPath = () => {
     if (path === '/') {
