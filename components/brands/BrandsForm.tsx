@@ -66,6 +66,7 @@ const ItemBox = styled.div`
   height: 107.62px;
   background: #ffffff;
   margin: 1px;
+  padding: 15px 17px 15px 21px;
 
   & > img {
     width: 70px;
@@ -75,7 +76,7 @@ const ItemBox = styled.div`
 const TextBox = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 40px;
+  margin-left: 17px;
 
   & > p:nth-child(1) {
     font-style: normal;
