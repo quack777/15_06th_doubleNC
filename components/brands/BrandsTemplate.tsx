@@ -5,7 +5,7 @@ import Nav from '../nav/Nav';
 const BrandsTemplate: React.FC = ({ children }) => {
   return (
     <Container>
-      <Nav />
+      <Nav name="brand" />
       {children}
     </Container>
   );
