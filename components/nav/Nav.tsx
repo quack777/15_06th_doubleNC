@@ -50,7 +50,9 @@ const Button = styled.button<ButtonType>`
     height: 30px;
     background-image: url(${({ theme, path }) =>
       path === '/' ? '/images/icon-menu.png' : '/images/icon-back_arrow.png'});
+
     background-repeat: no-repeat;
+    ${({ path }) => (path === '/' ? 'margin-top: 0px' : 'margin-top: 7px')};
   }
 `;
 const Title = styled.div`
