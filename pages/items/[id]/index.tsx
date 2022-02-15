@@ -16,20 +16,29 @@ const Items: React.FC<ItemInfoType> = (itemInfo: ItemInfoType) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await axios.get('https://api2.ncnc.app/con-category1s/67/nested');
-  const { conCategory1: { conCategory2s } } = data;
-  const conItems = conCategory2s[1].conItems;
+  const {data: { conCategory1s }} = await axios.get('https://api2.ncnc.app/con-category1s');
+  const categoriesID = conCategory1s.map(({id}: any) => id);
+  let paths: any = [];
 
-  const paths = conItems && conItems.map(({ id }: any) => ({
-    params: { id: id.toString() }
-  }))
+  for(let id of categoriesID) {
+    const { data } = await axios.get(`https://api2.ncnc.app/con-category1s/${id}/nested`);
+    const { conCategory1: { conCategory2s } } = data;
+    let conItems = [];
+    for(let i = 0; i < conCategory2s.length; i++) {
+      conItems = conCategory2s[i].conItems;
+
+      const conItemsID = conItems.map(({ id }: any) => ({
+        params: { id: id.toString() }
+      }))
+      paths = paths.concat(conItemsID);
+    }
+  }
   
-  return { paths, fallback: false }
+  return { paths, fallback: false };
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = params && params.id;
-  console.log(`getStaticProps: ${id}`);
     const { itemInfo } = await getItemInfo(id);
     console.log(itemInfo);
     if(!itemInfo) {

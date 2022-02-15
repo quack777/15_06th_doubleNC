@@ -11,7 +11,7 @@ const BrandsForm: React.FC = () => {
   const CalculateDiscountRate = (original, minSelling) => {
     return (((original - minSelling) * 100) / original).toFixed(1);
   };
-  console.log(items);
+  
   return (
     <Container>
       <Header>{items.length}개의 상품</Header>
