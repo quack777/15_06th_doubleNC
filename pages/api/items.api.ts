@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export interface ItemType {
+export interface ItemInfoType {
     id:              number;
     name:            string;
     originalPrice:   number;
@@ -8,9 +8,9 @@ export interface ItemType {
     ncSellingPrice:  number;
     warning:         string;
     discountRate:    number;
-    isOnlyAccount:   number;
     imageUrl:        string;
     options:         Option[];
+    brand:           string;
 }
 
 interface Option {
@@ -19,12 +19,15 @@ interface Option {
     sellingPrice: number;
 }
 
-export async function getItemInfo() {
-    const request = await axios.get('https://api2.ncnc.app/con-items/501');
-    const { data } = request;
-    const { id, name, originalPrice, minSellingPrice, ncSellingPrice, warning, discountRate, isOnlyRate, imageUrl, options } = data;
-    const itemInfo = { id, name, originalPrice, minSellingPrice, ncSellingPrice, warning, discountRate, isOnlyRate, imageUrl, options };
-
+export async function getItemInfo(paramsId: string | string[] | undefined) {
+    console.log(`test: ${paramsId}`);
+    const request = await axios.get(`https://api2.ncnc.app/con-items/${paramsId}`);
+    const { data: { conItem } } = request;
+    
+    const { id, name, originalPrice, minSellingPrice, ncSellingPrice, warning, discountRate, imageUrl, options, } = conItem;
+    
+    const itemInfo = { id, name, originalPrice, minSellingPrice, ncSellingPrice, warning, discountRate, imageUrl, options, brand: conItem["conCategory2"].name };
+    
     return {
         itemInfo
     }

@@ -2,10 +2,15 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import OptionBox from './OptionBox';
 import Modal from '../common/Modal';
+import type { ItemInfoType } from '../../pages/api/items.api';
 
-const ItemsForm: React.FC = () => {
+interface ItemsFormProps {
+  itemInfo: ItemInfoType;
+}
+
+const ItemsForm: React.FC<ItemsFormProps> = ({itemInfo}: ItemsFormProps) => {
   const [isShowing, setIsShowing] = useState<boolean>(false);
-
+  
   const showModal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     setIsShowing(!isShowing);
@@ -19,7 +24,7 @@ const ItemsForm: React.FC = () => {
           <img alt="item-img" className="item-img" src='/images/item-thumbnail.jpg'/>
         </ItemThumbnail>
         <ItemSubInfoContainer>
-          <div className="brand">브랜드명</div>
+          <div className="brand">{itemInfo.}</div>
           <div className="product">상품명</div>
           <PriceViewContainer>
             <div className="price-info countRate">00%</div>
