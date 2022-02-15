@@ -6,7 +6,6 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
     font-family: 'Nanum Gothic Coding', monospace;
-  
   }
 
 `;

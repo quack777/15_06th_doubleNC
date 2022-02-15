@@ -96,7 +96,7 @@ const ItemInfo = styled.div`
 const BrandName = styled.p`
   margin: 0;
   color: #808080;
-  font-family: Apple SD Gothic Neo;
+  font-family: sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -107,7 +107,7 @@ const ItemName = styled.p`
   margin-top: 7px;
   margin-bottom: 13px;
   color: #000000;
-  font-family: Apple SD Gothic Neo;
+  font-family: sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -122,7 +122,7 @@ const Discount = styled.p`
   margin: 0;
   margin-right: 9px;
   color: #ff5757;
-  font-family: Apple SD Gothic Neo;
+  font-family: sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -132,7 +132,7 @@ const SellPrice = styled.p`
   margin: 0;
   margin-right: 6px;
   color: #000000;
-  font-family: Apple SD Gothic Neo;
+  font-family: sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -141,7 +141,7 @@ const SellPrice = styled.p`
 const RealPrice = styled.p`
   margin: 0;
   color: #808080;
-  font-family: Apple SD Gothic Neo;
+  font-family: sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;

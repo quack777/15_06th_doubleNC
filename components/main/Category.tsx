@@ -35,7 +35,7 @@ const Category: FC = ({ data }) => {
       {apiData?.map((data: ContextType) => (
         <Link
           key={data.id}
-          href={{ pathname: `/categories/[id]`, query: { sendData: JSON.stringify(apiData) } }}
+          href={{ pathname: `/categories/[id]`, query: { sendData: JSON.stringify(apiData), categoryName: data.name } }}
           as={`/categories/${data.id}`}
         >
           <DataBox>
@@ -60,6 +60,7 @@ const CategoryGrid = styled.div`
   width: 341px;
   height: 285px;
   margin: 0 auto;
+  margin-top: -80px;
 `;
 
 const DataBox = styled.div`

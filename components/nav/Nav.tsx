@@ -36,7 +36,7 @@ const Nav = ({ name, showMenu, SetShowMenu }: NavProps) => {
 const Container = styled.nav`
   ${({ theme }) => theme.flexMinin('row', '', 'center')}
   height: ${({ theme }) => theme.height.nav};
-  margin-top: 20px;
+  // margin-top: 20px;
   background-color: #ffffff;
 `;
 const Image = styled.div``;

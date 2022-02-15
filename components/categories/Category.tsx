@@ -7,28 +7,24 @@ const Category: FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-
     const categoryInfo = JSON.parse(router.query.sendData);
-    // console.log(categoryInfo);
     setData(categoryInfo);
-    // console.log('AA');
-    console.log(router.query);
   }, []);
 
   const categoryButton = (id, name): void => {
-    // router.push(`/categories/${id}`);
     router.push({ pathname: `/categories/[id]`, query: { categoryName: name } }, `/categories/${id}`);
   };
-
-  console.log(router.query, 'test');
-
 
   return (
     <TopCategories>
       <CategoriesBox>
         <div>
           {data?.map((data) => (
-            <CategoryName key={data.id} onClick={() => categoryButton(data.id, data.name)}>
+            <CategoryName
+              key={data.id}
+              active={data.id === Number(router.query.id)}
+              onClick={() => categoryButton(data.id, data.name)}
+            >
               {data.name}
             </CategoryName>
           ))}
@@ -70,10 +66,10 @@ const CategoriesBox = styled.div`
   }
 `;
 
-const CategoryName = styled.button`
+const CategoryName = styled.button<{ active?: boolean }>`
   padding: 10px 14px;
   height: 41px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ccc !important;
   border: none;
   background-color: #fff;
   color: #333;
@@ -81,6 +77,8 @@ const CategoryName = styled.button`
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
+  color: ${(props) => props.active && 'red'};
+  border-bottom: ${(props) => props.active && '1px solid red !important'};
 `;
 
 export default Category;
