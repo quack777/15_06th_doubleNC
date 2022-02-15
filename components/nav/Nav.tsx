@@ -6,9 +6,9 @@ interface ButtonType {
   path: string;
 }
 interface NavProps {
-  name?: string;
-  showMenu: boolean;
-  SetShowMenu: any;
+  name: string | string[] | undefined;
+  showMenu?: boolean;
+  SetShowMenu?: any;
 }
 const Nav = ({ name, showMenu, SetShowMenu }: NavProps) => {
   const router = useRouter();
