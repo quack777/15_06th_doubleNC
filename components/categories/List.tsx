@@ -50,7 +50,9 @@ const Container = styled.div`
   column-gap: 2px;
   row-gap: 2px;
   margin: 0 auto;
+  margin-top: 10px;
 `;
+
 const BrandButton = styled.div`
   ${({ theme }) => theme.flexMinin('column', 'center', 'center')}
   width: 112px;

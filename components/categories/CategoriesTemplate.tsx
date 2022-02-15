@@ -8,7 +8,7 @@ const CategoriesTemplate: React.FC = ({ children }) => {
   return (
     <Container>
       <Nav />
-      <BottomNav />
+      {/* <BottomNav /> */}
       {children}
     </Container>
   );
