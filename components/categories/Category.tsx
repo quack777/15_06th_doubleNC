@@ -15,7 +15,10 @@ const Category: FC = () => {
 
   useEffect(() => {
     if (router.query.sendData) {
+      const test = router.query.sendData as string[];
       const categoryInfo: ContextType[] = JSON.parse(router.query.sendData);
+      // const categoryInfo: ContextType[] = JSON.parse(test.join(''));
+      // console.log(test.join(''));
       setItemInfo(categoryInfo);
     }
   }, [router.query.sendData]);
