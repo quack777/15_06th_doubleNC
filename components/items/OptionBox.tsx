@@ -80,7 +80,7 @@ const Container = styled.div<ContainerTypeStyle>`
     cursor: pointer;
     z-index: 1000;
     transform: translateY(0);
-    transition: 0.3s ease-in-out;
+    transition: 0.25s ease-in-out;
 
     ${({isShowing}) => isShowing && css`
         transform: translateY(-334px);
