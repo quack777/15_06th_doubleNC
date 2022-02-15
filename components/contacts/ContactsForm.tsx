@@ -1,65 +1,103 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { GetStaticProps } from 'next';
-import axios from 'axios';
 import Link from 'next/link';
-// import { ContactsType } from '../../pages/api/categories.api';
+import { getContactData, getContactQnA } from '../../pages/api/contacts.api';
+import { redirect } from 'next/dist/server/api-utils';
 
-// interface MainContactsProps {
-//   data: ContactsType[];
-// }
-// const API_URL = 'https://api2.ncnc.app/qa-types';
-
-// export interface ContactsType {
-//   id: number;
-//   key: string;
-//   name: string;
-// }
-// { data }: MainContactsProps
 const ContactsForm = () => {
-  return (
-    <Container>
-      <TopTextBox>
-        <NavContainer>
-          <NavBlinkBox />
-          <p>고객센터</p>
-          <Link href="/">
-            <img src="/images/icon-close.png" alt="close" />
-          </Link>
-        </NavContainer>
-        <TitleContainer>
-          <div>상담시간 안내</div>
-          <div>평일 10:00 - 18:00</div>
-          <div>점심시간 12:30 - 13:30 / 토 ・ 일 ・ 공휴일 휴무</div>
-        </TitleContainer>
-      </TopTextBox>
+  const [qatypeData, setQatypeData] = useState<string>('');
+  const [qnAdata, setQnAData] = useState<string>('');
+  const [idNumber, setIdNumber] = useState<number>(1);
+  const [test, setTest] = useState();
 
-      <SelectContainer>
-        <SelectTitle>자주 묻는 질문</SelectTitle>
-        <Selecter>
-          <div>구매</div>
-          <div>판매</div>
-        </Selecter>
-      </SelectContainer>
-      <QnAContainer>큐엔에이 딱</QnAContainer>
-    </Container>
-  );
+  useEffect(() => {
+    const getApi = async () => {
+      const { data } = await getContactData();
+      setQatypeData(data.qaTypes);
+    };
+    getApi();
+  }, []);
+
+  useEffect(() => {
+    if (!qatypeData) return;
+    const getQnAApi = async () => {
+      const { data } = await getContactQnA([idNumber]);
+      setQnAData(data.qas);
+    };
+    getQnAApi();
+  }, [qatypeData, idNumber]);
+
+  console.log(qnAdata);
+  console.log(test);
+
+  if (qnAdata) {
+    return (
+      <Container>
+        <TopTextBox>
+          <NavContainer>
+            <NavBlinkBox />
+            <p>고객센터</p>
+            <Link href="/">
+              <img src="/images/icon-close.png" alt="close" />
+            </Link>
+          </NavContainer>
+          <TitleContainer>
+            <div>상담시간 안내</div>
+            <div>평일 10:00 - 18:00</div>
+            <div>점심시간 12:30 - 13:30 / 토 ・ 일 ・ 공휴일 휴무</div>
+          </TitleContainer>
+        </TopTextBox>
+
+        <SelectContainer>
+          <SelectTitle>자주 묻는 질문</SelectTitle>
+          <Selecter>
+            <SelecterPurchase
+              idNumber={idNumber}
+              id={qatypeData[0].id}
+              onClick={() => {
+                setIdNumber(1);
+              }}
+            >
+              {qatypeData[0].name}
+            </SelecterPurchase>
+            <SelecterSell
+              idNumber={idNumber}
+              id={qatypeData[1].id}
+              onClick={() => {
+                setIdNumber(2);
+              }}
+            >
+              {qatypeData[1].name}
+            </SelecterSell>
+          </Selecter>
+        </SelectContainer>
+        <QnAContainer>
+          {qnAdata.map((app: string, index) => {
+            return (
+              <>
+                <QnAQuestion
+                  onClick={() => {
+                    setTest(index);
+                  }}
+                >
+                  <span>Q.</span>
+                  <span>{app.question}</span>
+                  <span>
+                    <img src="/images/icon-down-arrow.png" />
+                  </span>
+                </QnAQuestion>
+                <QnAAnswer className={index + 1} test={test}>
+                  {app.answer}
+                </QnAAnswer>
+              </>
+            );
+          })}
+        </QnAContainer>
+      </Container>
+    );
+  } else return null;
 };
-// export async function getStaticProps() {
-//   const request = await fetch(`${API_URL}`);
-//   const contact = await request.json();
 
-//   return { contact };
-// }
-// export async function getStaticProps() {
-//   const { data } = await axios.get('https://api2.ncnc.app/qa-types');
-
-//   return {
-//     props: {
-//       data: data.qaTypes,
-//     },
-//   };
-// }
 const Container = styled.div`
   background-color: ${({ theme }) => theme.color.background};
 `;
@@ -67,7 +105,6 @@ const Container = styled.div`
 const TopTextBox = styled.div`
   width: 100%;
   height: 284px;
-  border: 1px solid black;
   margin-bottom: 9px;
   background-color: #ffffff;
 `;
@@ -130,15 +167,56 @@ const Selecter = styled.div`
     font-size: 14px;
     line-height: 40px;
     cursor: pointer;
-    color: #808080;
   }
   & div:hover {
-    color: orange;
-    border-bottom: 2px solid orange;
+    color: #ff5757;
+    border-bottom: 2px solid #ff5757;
   }
+`;
+const SelecterPurchase = styled.div`
+  color: ${(props) => (props.idNumber === 1 ? '#FF5757' : '#808080')};
+  border-bottom: ${(props) => (props.idNumber === 1 ? '2px' : '0px')} solid
+    ${(props) => (props.idNumber === 1 ? '#FF5757' : '#808080')};
+`;
+const SelecterSell = styled.div`
+  color: ${(props) => (props.idNumber === 2 ? '#FF5757' : '#808080')};
+  border-bottom: ${(props) => (props.idNumber === 2 ? '2px' : '0px')} solid
+    ${(props) => (props.idNumber === 2 ? '#FF5757' : '#808080')};
 `;
 const QnAContainer = styled.div`
   margin-top: 10px;
   background-color: #ffffff;
 `;
+const QnAQuestion = styled.div`
+  ${({ theme }) => theme.flexMinin('row', 'flex-start', 'center')};
+  height: 50px;
+  font-weight: 600;
+  font-size: 15px;
+  word-spacing: -4px;
+  cursor: pointer;
+  & :nth-child(1) {
+    flex: 1;
+    font-weight: 600;
+    color: #ff5757;
+  }
+  & :nth-child(2) {
+    flex: 10;
+    text-align: left;
+  }
+  & :nth-child(3) {
+    flex: 1;
+  }
+`;
+const QnAAnswer = styled.div`
+  display: block;
+  padding: 17px;
+  font-size: 15px;
+  word-spacing: -4px;
+  text-align: left;
+  background-color: ${({ theme }) => theme.color.background};
+  &.1 {
+    color: red;
+  }
+`;
+
 export default ContactsForm;
