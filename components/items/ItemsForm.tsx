@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import OptionBox from './OptionBox';
 import Modal from '../common/Modal';
+import { regExp } from '../../utils/regExp';
 import type { ItemInfoType } from '../../pages/api/items.api';
 
 interface ItemsFormProps {
@@ -15,21 +16,22 @@ const ItemsForm: React.FC<ItemsFormProps> = ({itemInfo}: ItemsFormProps) => {
     e.preventDefault();
     setIsShowing(!isShowing);
   }
-
+  const parseMessage = regExp(itemInfo.warning);
+  console.log(itemInfo.warning ,parseMessage);
   return (
     <Container>
       <Modal isShowing={isShowing} hide={setIsShowing}/>
       <ItemFrontInfoContainer>
         <ItemThumbnail>
-          <img alt="item-img" className="item-img" src='/images/item-thumbnail.jpg'/>
+          <img alt="item-img" className="item-img" src={itemInfo.imageUrl}/>
         </ItemThumbnail>
         <ItemSubInfoContainer>
-          <div className="brand">{itemInfo.}</div>
-          <div className="product">상품명</div>
+          <div className="brand">{itemInfo.brand}</div>
+          <div className="product">{itemInfo.name}</div>
           <PriceViewContainer>
-            <div className="price-info countRate">00%</div>
-            <div className="price-info countPrice">000,000원</div>
-            <div className="price-info originalPrice">000,000원</div>
+            <div className="price-info countRate">{`${itemInfo.discountRate}%`}</div>
+            <div className="price-info countPrice">{`${itemInfo.minSellingPrice.toLocaleString('kw')}원`}</div>
+            <div className="price-info originalPrice">{`${itemInfo.originalPrice.toLocaleString('kw')}원`}</div>
           </PriceViewContainer>
         </ItemSubInfoContainer>
       </ItemFrontInfoContainer>
@@ -111,14 +113,14 @@ const ItemSubInfoContainer = styled.div`
 `;
 
 const PriceViewContainer = styled.div`
-  ${({ theme }) => theme.flexMinin('row', 'space-between', 'center')};
-  min-width: 206px;
+  ${({ theme }) => theme.flexMinin('row', '', 'center')};
 
   & .price-info {
     font-family: sans-serif;
   }
 
   & .countRate {
+    margin-right: 9px;
     font-size: 18px;
     font-weight: 500;
     line-height: 19px;
@@ -126,6 +128,7 @@ const PriceViewContainer = styled.div`
   }
 
   & .countPrice {
+    margin-right: 9px;
     font-size: 18px;
     font-weight: 400;
     line-height: 19px;
