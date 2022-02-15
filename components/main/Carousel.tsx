@@ -65,6 +65,7 @@ const SlideButton = styled.button`
   position: relative;
   left: 140px;
   bottom: 100px;
+  padding: 0;
   z-index: 3;
 
   font-family: Roboto;

@@ -24,7 +24,6 @@ const Nav = ({ name, showMenu, SetShowMenu }: NavProps) => {
   console.log(showMenu);
   return (
     <Container>
-      <Image />
       <Button path={path} onClick={goToPath}>
         <div className="image" />
       </Button>
@@ -39,24 +38,26 @@ const Container = styled.nav`
   // margin-top: 20px;
   background-color: #ffffff;
 `;
-const Image = styled.div``;
+
 const Button = styled.button<ButtonType>`
-  magin: 3px;
+  position: absolute;
+  left: 0;
+  margin-left: 10px;
   background: none;
   border: none;
   cursor: pointer;
   & .image {
     width: 30px;
     height: 30px;
-    background-image: url(${({ theme, path }) =>
-      path === '/' ? '/images/icon-menu.png' : '/images/icon-back_arrow.png'});
-
+    background-image: url(${({ path }) => (path === '/' ? '/images/icon-menu.png' : '/images/icon-back_arrow.png')});
     background-repeat: no-repeat;
     ${({ path }) => (path === '/' ? 'margin-top: 0px' : 'margin-top: 7px')};
   }
 `;
+
 const Title = styled.div`
-  margin-left: 130px;
+  //margin-left: 130px;
+  margin: 0 auto;
   font-style: normal;
   font-weight: 600;
   font-size: 15px;

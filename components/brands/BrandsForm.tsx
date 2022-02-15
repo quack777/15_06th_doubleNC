@@ -4,6 +4,7 @@ import Category from '../categories/Category';
 import List from '../categories/List';
 import Link from 'next/link';
 import styled from 'styled-components';
+import moneyAddComma from '../utils/moneyAddComma';
 const BrandsForm: React.FC = () => {
   const router = useRouter();
   const items = JSON.parse(router.query.data);
@@ -25,8 +26,8 @@ const BrandsForm: React.FC = () => {
                   <p>{data.name}</p>
                   <Price>
                     <p>{`${CalculateDiscountRate(data.originalPrice, data.minSellingPrice)}%`}</p>
-                    <p>{`${data.minSellingPrice}원`}</p>
-                    <p>{`${data.originalPrice}원`}</p>
+                    <p>{`${moneyAddComma(data.minSellingPrice)}원`}</p>
+                    <p>{`${moneyAddComma(data.originalPrice)}원`}</p>
                   </Price>
                 </TextBox>
               </div>
@@ -46,16 +47,14 @@ const Container = styled.div`
 const Header = styled.div`
   width: 375px;
   height: 40px;
-  left: 0px;
-  top: 94px;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
-
+  padding-left: 13px;
   display: flex;
   align-items: center;
-
+  margin-bottom: 9px;
   color: #000000;
 
   background: #ffffff;
@@ -65,7 +64,7 @@ const ItemBox = styled.div`
   align-items: center;
   height: 107.62px;
   background: #ffffff;
-  margin: 1px;
+  margin: 1px 0;
   padding: 15px 17px 15px 21px;
 
   & > img {
@@ -83,8 +82,9 @@ const TextBox = styled.div`
     font-weight: normal;
     font-size: 15px;
     line-height: 19px;
-    display: flex;
-    align-items: center;
+    text-align: justify;
+    margin: 0;
+    margin-bottom: 11px;
   }
 `;
 const Price = styled.div`
@@ -97,6 +97,7 @@ const Price = styled.div`
     font-size: 16px;
     line-height: 19px;
     color: #ff5757;
+    margin: 0;
     margin-right: 9px;
   }
 
@@ -105,6 +106,7 @@ const Price = styled.div`
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
+    margin: 0;
     margin-right: 6px;
   }
   & > p:nth-child(3) {
@@ -120,6 +122,7 @@ const Price = styled.div`
     text-decoration-line: line-through;
 
     color: #808080;
+    margin: 0;
   }
 `;
 /*
