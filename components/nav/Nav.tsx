@@ -6,7 +6,7 @@ interface ButtonType {
   path: string;
 }
 interface NavProps {
-  name: string | string[] | undefined;
+  name: string | undefined;
   showMenu?: boolean;
   SetShowMenu?: any;
 }
