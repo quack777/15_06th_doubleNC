@@ -81,6 +81,7 @@ const ItemBox = styled.div`
   padding-left: 19px;
   padding-top: 21px;
   background: #ffffff;
+  cursor: pointer;
   & > img {
     width: 70px;
     height: 70px;

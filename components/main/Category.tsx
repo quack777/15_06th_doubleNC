@@ -61,6 +61,7 @@ const CategoryGrid = styled.div`
   height: 285px;
   margin: 0 auto;
   margin-top: -80px;
+  cursor: pointer;
 `;
 
 const DataBox = styled.div`
@@ -74,6 +75,8 @@ const DataBox = styled.div`
   padding-bottom: 12.95px;
   background: #ffffff;
   border-radius: 5px;
+  cursor: pointer;
+
   & > img {
     width: 43px;
     height: 43px;
