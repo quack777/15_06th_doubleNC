@@ -7,6 +7,7 @@ const GlobalLayout: React.FC = ({ children }) => {
 };
 
 const Container = styled.div`
+  position: relative;
   max-width: ${({ theme }) => theme.basicWidth};
   max-height: ${({ theme }) => theme.height.content};
   margin: 0 auto;
