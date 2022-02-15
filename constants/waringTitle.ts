@@ -1,0 +1,1 @@
+export const waringTitle: string[] = ['유의사항', '사용 불가 매장', '환불규정'];

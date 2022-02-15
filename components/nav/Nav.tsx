@@ -28,7 +28,7 @@ const Nav = ({ name, showMenu, SetShowMenu }: NavProps) => {
       <Button path={path} onClick={goToPath}>
         <div className="image" />
       </Button>
-      <Title>NAV</Title>
+      <Title>{name}</Title>
     </Container>
   );
 };

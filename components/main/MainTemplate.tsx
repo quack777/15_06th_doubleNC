@@ -5,6 +5,7 @@ import axios from 'axios';
 import { GetStaticProps, GetStaticPropsResult } from 'next';
 import ContactsMenu from '../contacts/ContactsMenu';
 
+
 interface PropsType {
   showMenu: boolean;
   SetShowMenu: boolean;
