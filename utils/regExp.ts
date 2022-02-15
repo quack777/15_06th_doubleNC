@@ -1,6 +1,6 @@
 import { waringTitle } from '../constants/waringTitle';
 
-export function regExp(str: string): string | string[][] {  
+export function regExp(str: string): undefined | string[][] {  
     var reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi
     if(reg.test(str)){
       const regularStr = str.replace(reg, "").split('\n');
@@ -28,7 +28,5 @@ export function regExp(str: string): string | string[][] {
           if(pt === targetStr.length - 1) newParseStr.push(tmpArr);
       }
       return newParseStr;
-    } else {
-      return str;
-    }  
+    } 
 }

@@ -17,7 +17,7 @@ const ItemsForm: React.FC<ItemsFormProps> = ({itemInfo}: ItemsFormProps) => {
     setIsShowing(!isShowing);
   }
   const parseMessage = regExp(itemInfo.warning);
-  console.log(itemInfo.warning ,parseMessage);
+  
   return (
     <Container>
       <Modal isShowing={isShowing} hide={setIsShowing}/>
@@ -36,21 +36,23 @@ const ItemsForm: React.FC<ItemsFormProps> = ({itemInfo}: ItemsFormProps) => {
         </ItemSubInfoContainer>
       </ItemFrontInfoContainer>
       <ItemBottomInfoContainer>
-        <NoteInfoContainer>
-        <NoteInfoTitle>유의사항</NoteInfoTitle>
-        <NoteInfoList>
-            <NoteInfo>쿠폰 사용처에서 유효기간 내에 사용이 가능합니다.</NoteInfo>
-            <NoteInfo>포인트 적립 및 제휴카드 할인 등은 교환처의 정책에 따릅니다.</NoteInfo>
-            <NoteInfo>바코드 인식이 안될 경우, 바코드 번호를 입력하여 결제 할 수 있습니다.</NoteInfo>
-        </NoteInfoList>
-        </NoteInfoContainer>
-        <NoteInfoContainer>
-        <NoteInfoTitle>환불규정</NoteInfoTitle>
-        <NoteInfoList>
-            <NoteInfo>니콘내콘에서 판매되는 쿠폰은 개인 간 거래를 통해 리셀링되는 상품으로 환불 및 유효기간 연장이 불가합니다.</NoteInfo>
-            <NoteInfo>쿠폰 사용이 불가할 경우, 카카오톡 플러스친구 @니콘내콘으로 문의해주시기 바랍니다.</NoteInfo>
-        </NoteInfoList>
-        </NoteInfoContainer>
+        {
+          parseMessage && parseMessage.map((messages: string[], index) => {
+            return (
+            <NoteInfoContainer key={index}>
+              <NoteInfoTitle>{messages[0]}</NoteInfoTitle>
+                <NoteInfoList>
+                  {
+                    messages.map((message: string, index) => {
+                      if(index === 0) return;
+                      return <NoteInfo key={index}>{message}</NoteInfo>
+                    })
+                  }
+                </NoteInfoList>
+            </NoteInfoContainer>
+            )
+          })
+        }
       </ItemBottomInfoContainer>
       <OptionButton onClick={showModal}>옵션 선택하기</OptionButton>
      <OptionBox isShowing={isShowing}/>
