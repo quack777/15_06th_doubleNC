@@ -2,6 +2,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import moneyAddComma from '../utils/moneyAddComma';
 
 const Items: FC = () => {
   const [itemsInfo, setItemsInfo] = useState();
@@ -30,8 +31,8 @@ const Items: FC = () => {
                 <ItemName>{data.name}</ItemName>
                 <PriceInfo>
                   <Discount>{`${data.discountRate}%`}</Discount>
-                  <SellPrice>{data.ncSellingPrice}</SellPrice>
-                  <RealPrice>{data.originalPrice}</RealPrice>
+                  <SellPrice>{moneyAddComma(data.minSellingPrice)}</SellPrice>
+                  <RealPrice>{moneyAddComma(data.originalPrice)}</RealPrice>
                 </PriceInfo>
               </ItemInfo>
             </ItemBox>

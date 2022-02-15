@@ -4,6 +4,7 @@ import Category from '../categories/Category';
 import List from '../categories/List';
 import Link from 'next/link';
 import styled from 'styled-components';
+import moneyAddComma from '../utils/moneyAddComma';
 const BrandsForm: React.FC = () => {
   const router = useRouter();
   const items = JSON.parse(router.query.data);
@@ -25,8 +26,8 @@ const BrandsForm: React.FC = () => {
                   <p>{data.name}</p>
                   <Price>
                     <p>{`${CalculateDiscountRate(data.originalPrice, data.minSellingPrice)}%`}</p>
-                    <p>{`${data.minSellingPrice}원`}</p>
-                    <p>{`${data.originalPrice}원`}</p>
+                    <p>{`${moneyAddComma(data.minSellingPrice)}원`}</p>
+                    <p>{`${moneyAddComma(data.originalPrice)}원`}</p>
                   </Price>
                 </TextBox>
               </div>
