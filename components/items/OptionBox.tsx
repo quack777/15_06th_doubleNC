@@ -1,9 +1,18 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-const OptionBox: React.FC = () => {
+interface OptionBoxTypeProps {
+    test: boolean
+}
+
+interface ContainerTypeStyle {
+    test: boolean
+}
+
+const OptionBox: React.FC<OptionBoxTypeProps> = ({test}: OptionBoxTypeProps) => {
+    console.log(test);
     return (
-        <Container>
+        <Container test={test}>
         <Guide>옵션 선택하기</Guide>
         <OptionList>
           <Option>
@@ -63,10 +72,20 @@ const OptionBox: React.FC = () => {
     )
 }
 
-const Container = styled.div`
-   background-color: #ffffff;
-   text-align: start;
-   cursor: pointer;
+const Container = styled.div<ContainerTypeStyle>`
+    position: relative;
+    visibility: hidden; 
+    background-color: #ffffff;
+    text-align: start;
+    cursor: pointer;
+    z-index: 999;
+    transform: translateY(0);
+    transition: 0.4s ease-in-out;
+
+    ${({test}) => test && css`
+        transform: translateY(-334px);
+        visibility: visible;
+    `}
 `;
 
 const Guide = styled.div`
