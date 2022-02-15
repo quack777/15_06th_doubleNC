@@ -1,7 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import OptionBox from './OptionBox';
 
 const ItemsForm: React.FC = () => {
+
+  const showModal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+  }
+
   return (
     <Container>
       <ItemFrontInfoContainer>
@@ -35,7 +41,8 @@ const ItemsForm: React.FC = () => {
         </NoteInfoList>
         </NoteInfoContainer>
       </ItemBottomInfoContainer>
-      <OptionButton>옵션 선택하기</OptionButton>
+      <OptionButton onClick={showModal}>옵션 선택하기</OptionButton>
+     <OptionBox />
   </Container>
   )
 };
@@ -155,7 +162,7 @@ const NoteInfo = styled.li`
 
 const OptionButton = styled.button`
   margin-top: 219.73px;
-  padding: 23px 129px 40px 129px;
+  padding: 23px 142px 40px 142px;
   border: none;
   background-color: #FF5757;
   text-align: center;
