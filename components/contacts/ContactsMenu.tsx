@@ -11,7 +11,7 @@ interface PropsType {
 const ContactsMenu = ({ showMenu, SetShowMenu }: PropsType) => {
   return (
     <Container showMenu={showMenu} SetShowMenu={SetShowMenu}>
-      <Nav showMenu={showMenu} SetShowMenu={SetShowMenu} />
+      <Nav name="마이페이지" showMenu={showMenu} SetShowMenu={SetShowMenu} />
       <Link href="/contacts">
         <Contacts>
           <p>고객센터</p>

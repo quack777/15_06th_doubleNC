@@ -14,5 +14,4 @@ function Main() {
   );
 }
 
-const Test = styled.div``;
 export default Main;
