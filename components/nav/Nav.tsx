@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 
@@ -7,18 +7,21 @@ interface ButtonType {
 }
 interface NavProps {
   name: string;
+  showMenu: boolean;
+  SetShowMenu: boolean;
 }
-const Nav = ({ name }: NavProps) => {
+const Nav = ({ name, showMenu, SetShowMenu }: NavProps) => {
   const router = useRouter();
   const path = router.asPath;
 
   const goToPath = () => {
     if (path === '/') {
-      // router.push('')
+      SetShowMenu(!showMenu);
     } else {
       router.back();
     }
   };
+  console.log(showMenu);
   return (
     <Container>
       <Image />

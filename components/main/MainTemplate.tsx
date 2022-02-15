@@ -1,11 +1,19 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Nav from '../nav/Nav';
+import ContactsMenu from '../contacts/ContactsMenu';
 
-const MainTemplate: React.FC = ({ children }) => {
+interface PropsType {
+  showMenu: boolean;
+  SetShowMenu: boolean;
+  childern: JSX.Element;
+}
+
+const MainTemplate = ({ showMenu, SetShowMenu, children }: PropsType) => {
   return (
     <Container>
-      <Nav />
+      <ContactsMenu showMenu={showMenu} SetShowMenu={SetShowMenu} />
+      <Nav showMenu={showMenu} SetShowMenu={SetShowMenu} />
       {children}
     </Container>
   );

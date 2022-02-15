@@ -1,7 +1,11 @@
 import React from 'react';
 
 const MainForm: React.FC = () => {
-  return <div>MainForm</div>;
+  return (
+    <div>
+      <div>MainForm</div>
+    </div>
+  );
 };
 
 export default MainForm;
