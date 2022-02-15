@@ -10,7 +10,9 @@ interface ContextType {
 }
 
 const Category: FC = () => {
+
   const [itemInfo, setItemInfo] = useState<ContextType[]>();
+
   const router = useRouter();
 
   useEffect(() => {
@@ -22,6 +24,7 @@ const Category: FC = () => {
       setItemInfo(categoryInfo);
     }
   }, [router.query.sendData]);
+
 
   const categoryButton = (id: string, name: string): void => {
     router.push({ pathname: `/categories/[id]`, query: { categoryName: name } }, `/categories/${id}`);
