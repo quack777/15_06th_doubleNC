@@ -98,6 +98,7 @@ const Price = styled.div`
     color: #ff5757;
     margin-right: 9px;
   }
+
   & > p:nth-child(2) {
     font-family: sans-serif;
     font-weight: 500;
