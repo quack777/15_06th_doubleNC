@@ -9,7 +9,7 @@ const Items: FC = () => {
   useEffect(() => {
     const getApi = () => {
       axios.get('https://api2.ncnc.app/con-items/soon').then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setItemsInfo(res.data);
       });
     };

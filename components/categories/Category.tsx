@@ -6,15 +6,26 @@ const Category: FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(router);
-    //setData(router.query.sendData);
-    console.log('AA');
-  });
+    const categoryInfo = JSON.parse(router.query.sendData);
+    // console.log(categoryInfo);
+    setData(categoryInfo);
+    // console.log('AA');
+    console.log(router.query);
+  }, []);
+
+  const categoryButton = (id, name): void => {
+    // router.push(`/categories/${id}`);
+    router.push({ pathname: `/categories/[id]`, query: { categoryName: name } }, `/categories/${id}`);
+  };
+
+  console.log(router.query, 'test');
 
   return (
     <div className="Category">
       {data?.map((data) => (
-        <p>{data}</p>
+        <p key={data.id} onClick={() => categoryButton(data.id, data.name)}>
+          {data.name}
+        </p>
       ))}
     </div>
   );

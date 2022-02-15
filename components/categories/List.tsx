@@ -14,10 +14,6 @@ const List: React.FC = () => {
     });
   };
 
-  const ClickBrand = (e: React.MouseEventHandler<HTMLLIElement>): void => {
-    console.log('>>>>>>', e.target);
-    router.push(`../brands/${e.target.id}`);
-  };
   useEffect(() => {
     getApi();
   }, [router.query.id]);
@@ -42,7 +38,7 @@ const List: React.FC = () => {
       </Container>
     );
   } else {
-    return <div></div>;
+    return null;
   }
 };
 
@@ -50,19 +46,19 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  width: 100%;
-  column-gap: 1px;
-  row-gap: 1px;
+  width: 341px;
+  column-gap: 2px;
+  row-gap: 2px;
+  margin: 0 auto;
 `;
 const BrandButton = styled.div`
   ${({ theme }) => theme.flexMinin('column', 'center', 'center')}
-  width:112px;
+  width: 112px;
   cursor: pointer;
   height: 94px;
   background: #ffffff;
   border-radius: 5px;
   border: none;
-  margin: 2px;
   a {
     text-decoration: none;
   }

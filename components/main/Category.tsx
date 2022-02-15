@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Link from 'next/link';
 import React, { FC, useEffect, useState } from 'react';
+import { json } from 'stream/consumers';
 import styled from 'styled-components';
 
 interface ContextType {
@@ -11,7 +12,6 @@ interface ContextType {
 }
 
 const Category: FC = ({ data }) => {
-  console.log(data);
   // 일단 test => aixos useEffect 사용
   // categories 페이지에 사용할 categories.name값 전달
   const [apiData, setApiData] = useState<ContextType[]>();
@@ -33,7 +33,11 @@ const Category: FC = ({ data }) => {
   return (
     <CategoryGrid>
       {apiData?.map((data: ContextType) => (
-        <Link key={data.id} href={{ pathname: `/categories/[id]`, query: { sendData } }} as={`/categories/${data.id}`}>
+        <Link
+          key={data.id}
+          href={{ pathname: `/categories/[id]`, query: { sendData: JSON.stringify(apiData) } }}
+          as={`/categories/${data.id}`}
+        >
           <DataBox>
             <img src={data.imageUrl} alt="img정보" />
             <p>{data.name}</p>
