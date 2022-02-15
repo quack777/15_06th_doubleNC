@@ -47,16 +47,14 @@ const Container = styled.div`
 const Header = styled.div`
   width: 375px;
   height: 40px;
-  left: 0px;
-  top: 94px;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
-
+  padding-left: 13px;
   display: flex;
   align-items: center;
-
+  margin-bottom: 9px;
   color: #000000;
 
   background: #ffffff;
@@ -66,7 +64,7 @@ const ItemBox = styled.div`
   align-items: center;
   height: 107.62px;
   background: #ffffff;
-  margin: 1px;
+  margin: 1px 0;
   padding: 15px 17px 15px 21px;
 
   & > img {
@@ -84,8 +82,9 @@ const TextBox = styled.div`
     font-weight: normal;
     font-size: 15px;
     line-height: 19px;
-    display: flex;
-    align-items: center;
+    text-align: justify;
+    margin: 0;
+    margin-bottom: 11px;
   }
 `;
 const Price = styled.div`
@@ -98,6 +97,7 @@ const Price = styled.div`
     font-size: 16px;
     line-height: 19px;
     color: #ff5757;
+    margin: 0;
     margin-right: 9px;
   }
 
@@ -106,6 +106,7 @@ const Price = styled.div`
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
+    margin: 0;
     margin-right: 6px;
   }
   & > p:nth-child(3) {
@@ -121,6 +122,7 @@ const Price = styled.div`
     text-decoration-line: line-through;
 
     color: #808080;
+    margin: 0;
   }
 `;
 /*
