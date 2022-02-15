@@ -8,7 +8,7 @@ const ContactsForm = () => {
   const [qatypeData, setQatypeData] = useState<string>('');
   const [qnAdata, setQnAData] = useState<string>('');
   const [idNumber, setIdNumber] = useState<number>(1);
-  const [test, setTest] = useState();
+  const [targetNum, setTargetNum] = useState();
 
   useEffect(() => {
     const getApi = async () => {
@@ -28,7 +28,7 @@ const ContactsForm = () => {
   }, [qatypeData, idNumber]);
 
   console.log(qnAdata);
-  console.log(test);
+  console.log(targetNum);
 
   if (qnAdata) {
     return (
@@ -72,12 +72,12 @@ const ContactsForm = () => {
           </Selecter>
         </SelectContainer>
         <QnAContainer>
-          {qnAdata.map((app: string, index) => {
+          {qnAdata.map((app: string) => {
             return (
               <>
                 <QnAQuestion
                   onClick={() => {
-                    setTest(index);
+                    setTargetNum(app.id);
                   }}
                 >
                   <span>Q.</span>
@@ -86,9 +86,7 @@ const ContactsForm = () => {
                     <img src="/images/icon-down-arrow.png" />
                   </span>
                 </QnAQuestion>
-                <QnAAnswer className={index + 1} test={test}>
-                  {app.answer}
-                </QnAAnswer>
+                {targetNum == app.id ? <QnAAnswer>{app.answer}</QnAAnswer> : null}
               </>
             );
           })}
@@ -208,15 +206,21 @@ const QnAQuestion = styled.div`
   }
 `;
 const QnAAnswer = styled.div`
-  display: block;
   padding: 17px;
   font-size: 15px;
   word-spacing: -4px;
   text-align: left;
   background-color: ${({ theme }) => theme.color.background};
-  &.1 {
-    color: red;
-  }
 `;
+// &.${(props) => props.test} {
+//   ${(props) =>
+//     props.test == 55
+//       ? css`
+//           display: none;
+//         `
+//       : css`
+//           display: block;
+//         `}
+// }
 
 export default ContactsForm;
