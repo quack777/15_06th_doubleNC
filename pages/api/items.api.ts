@@ -20,7 +20,6 @@ interface Option {
 }
 
 export async function getItemInfo(paramsId: string | string[] | undefined) {
-    console.log(`test: ${paramsId}`);
     const request = await axios.get(`https://api2.ncnc.app/con-items/${paramsId}`);
     const { data: { conItem } } = request;
     

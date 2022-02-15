@@ -6,7 +6,7 @@ interface ButtonType {
   path: string;
 }
 interface NavProps {
-  name: string;
+  name?: string;
 }
 const Nav = ({ name }: NavProps) => {
   const router = useRouter();
@@ -25,7 +25,7 @@ const Nav = ({ name }: NavProps) => {
       <Button path={path} onClick={goToPath}>
         <div className="image" />
       </Button>
-      <Title>NAV</Title>
+      <Title>{name}</Title>
     </Container>
   );
 };

@@ -7,6 +7,7 @@ const Category: FC = () => {
   const router = useRouter();
 
   useEffect(() => {
+
     const categoryInfo = JSON.parse(router.query.sendData);
     // console.log(categoryInfo);
     setData(categoryInfo);
@@ -20,6 +21,7 @@ const Category: FC = () => {
   };
 
   console.log(router.query, 'test');
+
 
   return (
     <TopCategories>

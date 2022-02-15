@@ -8,7 +8,6 @@ import { GetStaticProps } from 'next';
 import { NextPage } from 'next';
 
 const Main: NextPage<{ results: any }> = ({ results }) => {
-  console.log('M AIN', results);
   return (
     <MainTemplate>
       <MainForm />
