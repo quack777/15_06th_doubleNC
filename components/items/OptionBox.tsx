@@ -1,89 +1,63 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { Option } from '../../pages/api/items.api';
 
 interface OptionBoxTypeProps {
     isShowing: boolean
+    messageColumn: number | undefined
+    options: Option[] | null
+    storeCheckedOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
 }
 
 interface ContainerTypeStyle {
     isShowing: boolean
+    messageColumn: number | undefined
 }
 
-const OptionBox: React.FC<OptionBoxTypeProps> = ({isShowing}: OptionBoxTypeProps) => {
+const OptionBox: React.FC<OptionBoxTypeProps> = ({isShowing, messageColumn, options, storeCheckedOption}: OptionBoxTypeProps) => {
     
     return (
-        <Container isShowing={isShowing}>
+        <Container isShowing={isShowing} messageColumn={messageColumn}>
         <Guide>옵션 선택하기</Guide>
         <OptionList>
-          <Option>
-            <InfoContainer>
-            <Info>
-              <span className="name">유효기간</span>
-              <span className="name">할인가</span>
-            </Info>
-            <Info>
-              <span className="content">2021.08.06 까지</span>
-              <span className="content">3250원</span>
-            </Info>
-            </InfoContainer>
-          <DiscountRate>14%</DiscountRate>
-          </Option>
-          <Option>
-            <InfoContainer>
-            <Info>
-              <span className="name">유효기간</span>
-              <span className="name">할인가</span>
-            </Info>
-            <Info>
-              <span className="content">2021.08.06 까지</span>
-              <span className="content">3250원</span>
-            </Info>
-            </InfoContainer>
-          <DiscountRate>14%</DiscountRate>
-          </Option>
-          <Option>
-            <InfoContainer>
-            <Info>
-              <span className="name">유효기간</span>
-              <span className="name">할인가</span>
-            </Info>
-            <Info>
-              <span className="content">2021.08.06 까지</span>
-              <span className="content">3250원</span>
-            </Info>
-            </InfoContainer>
-          <DiscountRate>14%</DiscountRate>
-          </Option>
-          <Option>
-            <InfoContainer>
-            <Info>
-              <span className="name">유효기간</span>
-              <span className="name">할인가</span>
-            </Info>
-            <Info>
-              <span className="content">2021.08.06 까지</span>
-              <span className="content">3250원</span>
-            </Info>
-            </InfoContainer>
-          <DiscountRate>14%</DiscountRate>
-          </Option>
+          {
+            options && options.map((option: Option, index) => {
+              return(
+                <Option id={String(index)} key={index} onClick={(e) => storeCheckedOption(e)}>
+                <InfoContainer>
+                <Info>
+                  <span className="name">유효기간</span>
+                  <span className="name">할인가</span>
+                </Info>
+                <Info>
+                  <span className="content">{option.expireAt.toString().split('T')[0]} 까지</span>
+                  <span className="content">{option.sellingPrice}</span>
+                </Info>
+                </InfoContainer>
+              <DiscountRate>{option.count}%</DiscountRate>
+              </Option>
+              )
+            }) 
+          }
         </OptionList>
       </Container>
     )
 }
 
 const Container = styled.div<ContainerTypeStyle>`
-    position: relative;
+    position: absolute;
+    bottom: -50px;
+    width: 375px;
     visibility: hidden; 
     background-color: #ffffff;
     text-align: start;
     cursor: pointer;
     z-index: 1000;
     transform: translateY(0);
-    transition: 0.25s ease-in-out;
+    transition: 0.15s ease-in-out;
 
-    ${({isShowing}) => isShowing && css`
-        transform: translateY(-334px);
+    ${({isShowing, messageColumn}) => isShowing && css`
+        transform: ${messageColumn && messageColumn > 12 ? 'translateY(-3px)' : 'translateY(-120px)'};
         visibility: visible;
     `}
 `;

@@ -2,6 +2,7 @@ import React, { useState, useEffect, FC } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { getContactData, getContactQnA } from '../../pages/api/contacts.api';
+import { apiResolver } from 'next/dist/server/api-utils';
 
 const ContactsForm: React.FC = () => {
   type QaType = {
@@ -35,9 +36,6 @@ const ContactsForm: React.FC = () => {
     };
     getQnAApi();
   }, [qatypeData, idNumber]);
-
-  console.log(qnAdata);
-  console.log(targetNum);
 
   if (qnAdata) {
     return (
@@ -92,7 +90,7 @@ const ContactsForm: React.FC = () => {
                   <span>Q.</span>
                   <span>{app.question}</span>
                   <span>
-                    <img src="/images/icon-down-arrow.png" />
+                    <img src={targetNum == app.id ? '/images/icon-up-arrow.png' : '/images/icon-down-arrow.png'} />
                   </span>
                 </QnAQuestion>
                 {targetNum == app.id ? <QnAAnswer>{app.answer}</QnAAnswer> : null}
@@ -106,12 +104,13 @@ const ContactsForm: React.FC = () => {
 };
 
 const Container = styled.div`
+  margin-top: -20px;
   background-color: ${({ theme }) => theme.color.background};
 `;
 
 const TopTextBox = styled.div`
   width: 100%;
-  height: 284px;
+  height: 304px;
   margin-bottom: 9px;
   background-color: #ffffff;
 `;
@@ -174,10 +173,6 @@ const Selecter = styled.div`
     font-size: 14px;
     line-height: 40px;
     cursor: pointer;
-  }
-  & div:hover {
-    color: #ff5757;
-    border-bottom: 2px solid #ff5757;
   }
 `;
 const SelecterPurchase = styled.div`
