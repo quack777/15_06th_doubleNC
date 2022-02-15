@@ -7,7 +7,7 @@ import { GetStaticProps, GetStaticPropsResult } from 'next';
 const MainTemplate: React.FC = ({ children }) => {
   return (
     <Container>
-      <Nav name="Main" />
+      <Nav name="니콘내콘" />
       {children}
     </Container>
   );

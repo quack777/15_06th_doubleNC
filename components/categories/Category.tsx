@@ -6,14 +6,12 @@ const Category: FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(router);
     setData(router.query.sendData);
-    console.log('AA');
   });
   const categoryButton = (e: React.MouseEventHandler<HTMLLIElement>): void => {
     router.push(`/categories/${e.target.id}`);
   };
-  console.log(data);
+
   return (
     <div className="Category">
       {data?.map((data) => (

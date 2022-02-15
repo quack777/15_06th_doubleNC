@@ -32,7 +32,11 @@ const Category: FC = ({ data }) => {
   return (
     <CategoryGrid>
       {apiData?.map((data: ContextType) => (
-        <Link key={data.id} href={{ pathname: `/categories/[id]`, query: { sendData } }} as={`/categories/${data.id}`}>
+        <Link
+          key={data.id}
+          href={{ pathname: `/categories/[id]`, query: { sendData: sendData, categoryName: data.name } }}
+          as={`/categories/${data.id}`}
+        >
           <DataBox>
             <img src={data.imageUrl} alt="img정보" />
             <p>{data.name}</p>
