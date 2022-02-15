@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { getContactData, getContactQnA } from '../../pages/api/contacts.api';
-import { redirect } from 'next/dist/server/api-utils';
 
-const ContactsForm = () => {
-  const [qatypeData, setQatypeData] = useState<string>('');
-  const [qnAdata, setQnAData] = useState<string>('');
+const ContactsForm: React.FC = () => {
+  type QaType = {
+    id: number;
+    name?: string;
+    key: number;
+  };
+  type QnA = {
+    id: number;
+    question: string;
+    answer: string;
+  };
+  const [qatypeData, setQatypeData] = useState<QaType>();
+  const [qnAdata, setQnAData] = useState<QnA>();
   const [idNumber, setIdNumber] = useState<number>(1);
   const [targetNum, setTargetNum] = useState();
 
