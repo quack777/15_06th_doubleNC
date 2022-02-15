@@ -19,7 +19,7 @@ const List: FC = () => {
   }, []);
 
   if (data) {
-    // console.log(data.conCategory1.conCategory2s);
+
     return (
       <>
         <Container>
