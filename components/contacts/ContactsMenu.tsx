@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import Nav from '../nav/Nav';
 
 interface PropsType {
@@ -10,7 +10,8 @@ interface PropsType {
 
 const ContactsMenu = ({ showMenu, SetShowMenu }: PropsType) => {
   return (
-    <Container showMenu={showMenu} SetShowMenu={SetShowMenu}>
+    <Container showMenu={showMenu}>
+      <TopBlink />
       <Nav name="마이페이지" showMenu={showMenu} SetShowMenu={SetShowMenu} />
       <Link href="/contacts">
         <Contacts>
@@ -24,6 +25,11 @@ const ContactsMenu = ({ showMenu, SetShowMenu }: PropsType) => {
     </Container>
   );
 };
+const TopBlink = styled.div`
+  height: 20px;
+  margin-bottom: -20px;
+  background-color: #ffffff;
+`;
 
 const Container = styled.div<{ showMenu: boolean }>`
   display: ${(props) => (props.showMenu ? 'block' : 'none')};
@@ -36,8 +42,18 @@ const Container = styled.div<{ showMenu: boolean }>`
   margin-top: -20px;
   text-align: center;
   background-color: ${({ theme }) => theme.color.background};
-  z-index: 9;
+  z-index: 4;
 `;
+// ${(props) =>
+//     props.showMenu
+//       ? css`
+//           transform: translateX(0vw);
+//         `
+//       : css`
+//           transform: translateX(-100vw);
+//         `}
+//   transition: all 2s;
+
 const Contacts = styled.div`
   ${({ theme }) => theme.flexMinin('row', 'space-between', 'center')}
   width: 100%;
@@ -53,7 +69,7 @@ const Contacts = styled.div`
   }
 `;
 const BlinkBox = styled.div`
-  height: 500px;
+  height: 1400px;
   background-color: #ffffff;
 `;
 
