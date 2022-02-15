@@ -9,6 +9,10 @@ interface ItemsFormProps {
   itemInfo: ItemInfoType;
 }
 
+interface OptionButtonStyleType {
+  messageColumn: number | undefined;
+}
+
 const ItemsForm: React.FC<ItemsFormProps> = ({itemInfo}: ItemsFormProps) => {
   const [isShowing, setIsShowing] = useState<boolean>(false);
   
@@ -17,6 +21,7 @@ const ItemsForm: React.FC<ItemsFormProps> = ({itemInfo}: ItemsFormProps) => {
     setIsShowing(!isShowing);
   }
   const parseMessage = regExp(itemInfo.warning);
+  const messageColumn = parseMessage && parseMessage.length;
   
   return (
     <Container>
@@ -54,7 +59,7 @@ const ItemsForm: React.FC<ItemsFormProps> = ({itemInfo}: ItemsFormProps) => {
           })
         }
       </ItemBottomInfoContainer>
-      <OptionButton onClick={showModal}>옵션 선택하기</OptionButton>
+      <OptionButton onClick={showModal} messageColumn={messageColumn}>옵션 선택하기</OptionButton>
      <OptionBox isShowing={isShowing}/>
   </Container>
   )
@@ -180,9 +185,9 @@ const NoteInfo = styled.li`
   }
 `;
 
-const OptionButton = styled.button`
+const OptionButton = styled.button<OptionButtonStyleType>`
   position: relative;
-  margin-top: 219.73px;
+  margin-top: ${({ messageColumn }) => messageColumn > 2 ? '157.73px' : '219.73px'};
   padding: 23px 142px 40px 142px;
   border: none;
   background-color: #FF5757;
