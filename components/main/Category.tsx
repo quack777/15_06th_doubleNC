@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Link from 'next/link';
 import React, { FC, useEffect, useState } from 'react';
+import { json } from 'stream/consumers';
 import styled from 'styled-components';
 
 interface ContextType {
@@ -34,7 +35,7 @@ const Category: FC = ({ data }) => {
       {apiData?.map((data: ContextType) => (
         <Link
           key={data.id}
-          href={{ pathname: `/categories/[id]`, query: { sendData: sendData, categoryName: data.name } }}
+          href={{ pathname: `/categories/[id]`, query: { sendData: JSON.stringify(apiData) } }}
           as={`/categories/${data.id}`}
         >
           <DataBox>
@@ -58,6 +59,7 @@ const CategoryGrid = styled.div`
   row-gap: 1.9px;
   width: 341px;
   height: 285px;
+  margin: 0 auto;
 `;
 
 const DataBox = styled.div`

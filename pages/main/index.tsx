@@ -11,7 +11,7 @@ const Main: NextPage<{ results: any }> = ({ results }) => {
   return (
     <MainTemplate>
       <MainForm />
-      main{JSON.stringify(results)}
+      {JSON.stringify(results)}
     </MainTemplate>
   );
 };

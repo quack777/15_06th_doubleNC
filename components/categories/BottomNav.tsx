@@ -6,6 +6,7 @@ const BottomNav = () => {
 
   const categoryButton = (e: React.MouseEventHandler<HTMLLIElement>): void => {
     router.push(`/categories/${e.target.id}`);
+    //router.push(`/categories/${router.query.id}`);
   };
 
   return (
