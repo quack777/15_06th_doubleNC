@@ -26,15 +26,15 @@ const Items: FC = () => {
           <Link key={data.id} href={{ pathname: '/items/[id]' }} as={`/items/${data.id}`}>
             <ItemBox>
               <img src={data.imageUrl} alt="상품이미지" />
-              <div>
-                <p>{data.conCategory2.name}</p>
-                <p>{data.name}</p>
-                <div>
-                  <p>{`${data.discountRate}%`}</p>
-                  <p>{data.ncSellingPrice}</p>
-                  <p>{data.originalPrice}</p>
-                </div>
-              </div>
+              <ItemInfo>
+                <BrandName>{data.conCategory2.name}</BrandName>
+                <ItemName>{data.name}</ItemName>
+                <PriceInfo>
+                  <Discount>{`${data.discountRate}%`}</Discount>
+                  <SellPrice>{data.ncSellingPrice}</SellPrice>
+                  <RealPrice>{data.originalPrice}</RealPrice>
+                </PriceInfo>
+              </ItemInfo>
             </ItemBox>
           </Link>
         ))}
@@ -72,17 +72,80 @@ const Title = styled.p`
 
 const ItemsList = styled.section`
   width: 100%;
-  background-color: aqua;
 `;
 
 const ItemBox = styled.div`
   display: flex;
   height: 107.62px;
+  margin-bottom: 1px;
+  padding-left: 19px;
+  padding-top: 21px;
   background: #ffffff;
   & > img {
     width: 70px;
     height: 70px;
+    margin-right: 17px;
   }
 `;
 
+const ItemInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+const BrandName = styled.p`
+  margin: 0;
+  color: #808080;
+  font-family: Apple SD Gothic Neo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+`;
+
+const ItemName = styled.p`
+  margin: 0;
+  margin-top: 7px;
+  margin-bottom: 13px;
+  color: #000000;
+  font-family: Apple SD Gothic Neo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+`;
+
+const PriceInfo = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Discount = styled.p`
+  margin: 0;
+  margin-right: 9px;
+  color: #ff5757;
+  font-family: Apple SD Gothic Neo;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+`;
+
+const SellPrice = styled.p`
+  margin: 0;
+  margin-right: 6px;
+  color: #000000;
+  font-family: Apple SD Gothic Neo;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+`;
+
+const RealPrice = styled.p`
+  margin: 0;
+  color: #808080;
+  font-family: Apple SD Gothic Neo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  text-decoration-line: line-through;
+`;
 export default Items;

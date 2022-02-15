@@ -55,6 +55,7 @@ const CategoryGrid = styled.div`
   row-gap: 1.9px;
   width: 341px;
   height: 285px;
+  margin: 0 auto;
 `;
 
 const DataBox = styled.div`
