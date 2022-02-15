@@ -8,7 +8,7 @@ interface ButtonType {
 interface NavProps {
   name?: string;
   showMenu: boolean;
-  SetShowMenu: boolean;
+  SetShowMenu: any;
 }
 const Nav = ({ name, showMenu, SetShowMenu }: NavProps) => {
   const router = useRouter();
