@@ -12,7 +12,7 @@ const Category: FC = () => {
 
   return (
     <div className="Category">
-      {data.map((data) => (
+      {data?.map((data) => (
         <p>{data}</p>
       ))}
     </div>
