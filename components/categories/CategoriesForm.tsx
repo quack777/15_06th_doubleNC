@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { GetStaticProps, GetStaticPaths } from 'next';
+import List from './List';
 
 const CategoriesForm: React.FC = () => {
-  return <div>CategoriesForm</div>;
+  return (
+    <div>
+      <List />
+    </div>
+  );
 };
 export default CategoriesForm;

@@ -1,14 +1,16 @@
-import React from 'react';
-import Category from './Category';
-import List from './List';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const BrandsForm: React.FC = () => {
-  return (
-    <>
-      <Category />
-      <List />
-    </>
-  );
+  const router = useRouter();
+  const items = JSON.parse(router.query.data);
+
+  console.log(items);
+  return <div>brand</div>;
 };
 
+/*
+      <Category />
+      <List />
+*/
 export default BrandsForm;
