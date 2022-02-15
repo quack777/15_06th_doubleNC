@@ -11,7 +11,6 @@ interface ContextType {
 }
 
 const Category: FC = ({ data }) => {
-  console.log(data);
   // 일단 test => aixos useEffect 사용
   // categories 페이지에 사용할 categories.name값 전달
   const [apiData, setApiData] = useState<ContextType[]>();
