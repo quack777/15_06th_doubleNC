@@ -3,7 +3,7 @@ import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Category: FC = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<string[] | string>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -11,7 +11,7 @@ const Category: FC = () => {
     setData(categoryInfo);
   }, []);
 
-  const categoryButton = (id, name): void => {
+  const categoryButton = (id: number, name: string): void => {
     router.push({ pathname: `/categories/[id]`, query: { categoryName: name } }, `/categories/${id}`);
   };
 

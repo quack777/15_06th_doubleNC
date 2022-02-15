@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Category from '../categories/Category';
-import List from '../categories/List';
 import Link from 'next/link';
 import styled from 'styled-components';
+
+interface BrandType {
+  id: number;
+  name: string;
+  originalPrice: number;
+  minSellingPrice: number;
+  count: number;
+  imageUrl: string;
+}
+
 const BrandsForm: React.FC = () => {
   const router = useRouter();
-  const items = JSON.parse(router.query.data);
+  const items: BrandType[] = JSON.parse(router.query.data) as string;
 
-  const CalculateDiscountRate = (original, minSelling) => {
+  const CalculateDiscountRate = (original: number, minSelling: number): string => {
     return (((original - minSelling) * 100) / original).toFixed(1);
   };
 

@@ -3,8 +3,6 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import Link from 'next/link';
 import styled from 'styled-components';
-import Nav from '../nav/Nav';
-import Items from '../main/Items';
 
 const List: React.FC = () => {
   const [data, setData] = useState('');
@@ -12,7 +10,7 @@ const List: React.FC = () => {
 
   const getApi = () => {
     axios.get(`https://api2.ncnc.app/con-category1s/${router.query.id}/nested`).then((res) => {
-      setData(res.data);
+      setData(res.data.conCategory1);
     });
   };
 
@@ -20,8 +18,7 @@ const List: React.FC = () => {
     getApi();
   }, [router.query.id]);
 
-  if (data.conCategory1) {
-    // console.log(data.conCategory1.conCategory2s);
+  if (data) {
     return (
       <>
         <Container>
