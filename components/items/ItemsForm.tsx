@@ -1,7 +1,12 @@
 import React from 'react';
+import List from './List';
 
 const ItemsForm: React.FC = () => {
-  return <div>ItemsForm</div>;
+  return (
+    <>
+      <List></List>
+    </>
+  );
 };
 
 export default ItemsForm;
