@@ -1,32 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import Link from 'next/link';
 import styled from 'styled-components';
 
-const List: React.FC = () => {
+const List: FC = () => {
   const [data, setData] = useState('');
   const router = useRouter();
 
-  const getApi = () => {
-    axios.get(`https://api2.ncnc.app/con-category1s/${router.query.id}/nested`).then((res) => {
-      setData(res.data.conCategory1);
-    });
-  };
-
   useEffect(() => {
+    const getApi = () => {
+      axios.get(`https://api2.ncnc.app/con-category1s/${router.query.id}/nested`).then((res) => {
+        setData(res.data.conCategory1);
+        console.log(res.data.conCategory1);
+      });
+    };
     getApi();
-  }, [router.query.id]);
+  }, []);
 
   if (data) {
+
     return (
       <>
         <Container>
-          {data.conCategory1.conCategory2s.map((item: any) => (
-            <BrandButton>
+          {data?.conCategory2s.map((item: any) => (
+            <BrandButton key={item.id}>
               <Link
                 href={{ pathname: '/brands/[id]', query: { name: item.name, data: JSON.stringify(item.conItems) } }}
                 as={`/brands/${item.id}`}
+                passHref
               >
                 <a>
                   <ImageBox id={item.id} src={item.imageUrl} />
@@ -71,6 +73,7 @@ const ImageBox = styled.img`
   width: 36px;
   height: 36px;
 `;
+
 const TextBox = styled.div`
   width: 95px;
   height: 13px;
@@ -79,4 +82,5 @@ const TextBox = styled.div`
   color: #000000;
   margin: 10px;
 `;
+
 export default List;

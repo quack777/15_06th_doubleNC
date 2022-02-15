@@ -13,7 +13,7 @@ export interface ItemInfoType {
     brand:           string;
 }
 
-interface Option {
+export interface Option {
     expireAt: Date;
     count: number;
     sellingPrice: number;

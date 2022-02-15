@@ -10,7 +10,7 @@ const Container = styled.div`
   position: relative;
   max-width: ${({ theme }) => theme.basicWidth};
   // max-height: ${({ theme }) => theme.height.content};
-  height: 60vh;
+  height: 90vh;
   overflow-y: scroll;
   margin: 0 auto;
   text-align: center;

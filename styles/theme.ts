@@ -5,7 +5,7 @@ export const theme: DefaultTheme = {
   basicWidth: '375px',
   height: {
     content: '812px',
-    nav: '93px',
+    nav: '49px',
   },
   color: {
     background: '#F1F3F4',

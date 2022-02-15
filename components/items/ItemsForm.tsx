@@ -1,30 +1,69 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from 'react';
+import styled, { css } from 'styled-components';
 import OptionBox from './OptionBox';
 import Modal from '../common/Modal';
 import { regExp } from '../../utils/regExp';
+import { getTarget } from '../../utils/getTarget';
 import type { ItemInfoType } from '../../pages/api/items.api';
+import type { Option } from '../../pages/api/items.api';
 
 interface ItemsFormProps {
   itemInfo: ItemInfoType;
 }
 
-interface OptionButtonStyleType {
+interface ContainerStyleType {
   messageColumn: number | undefined;
 }
 
+interface OptionButtonStyleType {
+  messageColumn: number | undefined;
+  isShowing: boolean
+  selectedOption: Option | undefined
+}
+
+interface SelectedOptionBoxStyleType {
+  selectedOption: Option | undefined
+}
+
+
+
 const ItemsForm: React.FC<ItemsFormProps> = ({itemInfo}: ItemsFormProps) => {
   const [isShowing, setIsShowing] = useState<boolean>(false);
+  const [messageColumn, setMessageColumn] = useState<number | undefined>(0);
+  const [options, setOptions] = useState<Option[] | null>(null);
+  const [selectedOption, setSelectedOption] = useState<Option | undefined>();
   
+  const storeCheckedOption = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    const target = e.target as HTMLLIElement
+    if(!target.id) return;
+    const targetOption = options?.find((_, index) => String(index) === target.id);
+    setSelectedOption(targetOption);
+    setIsShowing(!isShowing);
+  }
+
   const showModal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     setIsShowing(!isShowing);
   }
+
   const parseMessage = regExp(itemInfo.warning);
-  const messageColumn = parseMessage && parseMessage.length;
+
+  useEffect(() => {
+    if(itemInfo.warning) {      
+      const messageColumn = parseMessage && parseMessage[0].length + parseMessage[1].length + parseMessage[2].length;
+
+      setMessageColumn(messageColumn);
+    }
+  }, [itemInfo.warning]);
   
+  useEffect(() => {
+    if(itemInfo.options) {
+      setOptions(itemInfo.options);
+    }
+  }, [itemInfo.options]);
+
   return (
-    <Container>
+    <Container messageColumn={messageColumn}>
       <Modal isShowing={isShowing} hide={setIsShowing}/>
       <ItemFrontInfoContainer>
         <ItemThumbnail>
@@ -59,17 +98,30 @@ const ItemsForm: React.FC<ItemsFormProps> = ({itemInfo}: ItemsFormProps) => {
           })
         }
       </ItemBottomInfoContainer>
-      <OptionButton onClick={showModal} messageColumn={messageColumn}>옵션 선택하기</OptionButton>
-     <OptionBox isShowing={isShowing}/>
+      <SelectedOptionBox selectedOption={selectedOption}>
+          <ViewBox>
+            <Info>
+              {`${selectedOption?.expireAt.toString().split('T')[0]} / ${selectedOption?.sellingPrice }`}
+            </Info>
+            <EditButton onClick={showModal}/>
+          </ViewBox>
+        </SelectedOptionBox>
+      <OptionButton isShowing={isShowing} onClick={showModal} messageColumn={messageColumn} selectedOption={selectedOption}>
+        {
+          isShowing ? '구매하기' : selectedOption ? '구매하기' : '옵션 선택하기'
+        }
+      </OptionButton>
+     <OptionBox isShowing={isShowing} messageColumn={messageColumn} options={options} storeCheckedOption={storeCheckedOption}/>
   </Container>
   )
 };
 
-const Container = styled.form`
+const Container = styled.form<ContainerStyleType>`
   position: relative;
   max-height: 692.81px;
   background-color: #ffffff;
-  overflow: hidden;
+  overflow: ${({ messageColumn }) => messageColumn && messageColumn > 12 ? 'scroll' : 'hidden'};
+
 `;
 
 const ItemFrontInfoContainer = styled.div`
@@ -185,12 +237,43 @@ const NoteInfo = styled.li`
   }
 `;
 
+const SelectedOptionBox = styled.div<SelectedOptionBoxStyleType>`
+  visibility: ${({ selectedOption }) => selectedOption ? 'visible' : 'hidden'};
+  margin-top: 40px;
+  padding: 17px;
+  border-top: 1px solid #F1F3F4;
+  background-color: #FFFFFF;
+`;
+
+const ViewBox = styled.div`
+  position: relative;
+  ${({theme}) => theme.flexMinin('row', 'space-between', 'center')};
+  padding: 8px 17px;
+  background-color: #F1F3F4;
+  border-radius: 5px;
+`;
+
+const Info = styled.div`
+  font-family: sans-serif;
+  line-height: 17px;
+`;
+
+const EditButton = styled.button`
+  width: 13px;
+  height: 13px;
+  border: none;
+  background: url('/images/icon-edit_button.png') no-repeat;
+  background-position: center center;
+  background-size: contain;
+  cursor: pointer;
+`;
+
 const OptionButton = styled.button<OptionButtonStyleType>`
   position: relative;
-  margin-top: ${({ messageColumn }) => messageColumn > 2 ? '157.73px' : '219.73px'};
-  padding: 23px 142px 40px 142px;
+  margin-top: ${({ messageColumn }) => messageColumn && messageColumn > 12 ? '56px' : '89px'};
+  padding: ${({ isShowing, selectedOption }) => isShowing ? '23px 160px 40px 159px' : selectedOption ? '23px 160px 40px 159px' : '23px 142px 40px 142px'};
   border: none;
-  background-color: #FF5757;
+  background-color: ${({ isShowing }) => isShowing ? '#CCCCCC' : '#FF5757'};
   text-align: center;
   font-size: 14px;
   font-weight: 500;

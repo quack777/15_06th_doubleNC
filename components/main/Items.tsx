@@ -2,18 +2,60 @@ import axios from 'axios';
 import Link from 'next/link';
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import moneyAddComma from '../utils/moneyAddComma';
+
+interface ItemsType {
+  id: number;
+  name: string;
+  originalPrice: number;
+  count: number;
+  imageUrl: string;
+}
+
+interface Contegory2Type {
+  id: number;
+  name: string;
+  conCategory1Id: number;
+  imageUrl: string;
+  conItems: ItemsType[];
+}
+
+interface ItemInfo {
+  askingPrice: number;
+  conCategory2: Contegory2Type;
+  conCategory2Id: number;
+  count: number;
+  createdAt: string;
+  discountRate: number;
+  id: number;
+  imageUrl: string;
+  info: null | undefined;
+  information: null | undefined;
+  isBlock: number;
+  isOnlyAccount: number;
+  isRefuse: number;
+  minSellingPrice: number;
+  name: string;
+  ncSellingPrice: number;
+  originalPrice: number;
+  sfId: string;
+  tip: null | undefined;
+  warning: string;
+}
 
 const Items: FC = () => {
-  const [itemsInfo, setItemsInfo] = useState();
+  const [itemsInfo, setItemsInfo] = useState<ItemInfo[]>(); // 일단 이거 type지정 나중으로 미루죠
 
   useEffect(() => {
-    const getApi = () => {
+    const itemGetInfo = () => {
       axios.get('https://api2.ncnc.app/con-items/soon').then((res) => {
-        setItemsInfo(res.data);
+        setItemsInfo(res.data.conItems);
+        console.log(res.data.conItems); // type 지정 볼려고 작성한 console
       });
     };
-    getApi();
+    itemGetInfo();
   }, []);
+
   return (
     <>
       <Header>
@@ -21,8 +63,8 @@ const Items: FC = () => {
         <Title>오늘의 땡처리콘!</Title>
       </Header>
       <ItemsList>
-        {itemsInfo?.conItems.map((data) => (
-          <Link key={data.id} href={{ pathname: '/items/[id]' }} as={`/items/${data.id}`}>
+        {itemsInfo?.map((data) => (
+          <Link key={data.id} href={{ pathname: '/items/[id]' }} as={`/items/${data.id}`} passHref>
             <ItemBox>
               <img src={data.imageUrl} alt="상품이미지" />
               <ItemInfo>
@@ -30,8 +72,8 @@ const Items: FC = () => {
                 <ItemName>{data.name}</ItemName>
                 <PriceInfo>
                   <Discount>{`${data.discountRate}%`}</Discount>
-                  <SellPrice>{data.ncSellingPrice}</SellPrice>
-                  <RealPrice>{data.originalPrice}</RealPrice>
+                  <SellPrice>{moneyAddComma(String(data.minSellingPrice))}</SellPrice>
+                  <RealPrice>{moneyAddComma(String(data.originalPrice))}</RealPrice>
                 </PriceInfo>
               </ItemInfo>
             </ItemBox>
@@ -53,8 +95,9 @@ const Header = styled.header`
 
 const Alert = styled.p`
   margin: 0;
+  margin-bottom: 4px;
   color: #ff5757;
-  font-family: Apple SD Gothic Neo;
+  font-family: sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
@@ -63,7 +106,7 @@ const Alert = styled.p`
 const Title = styled.p`
   margin: 0;
   color: #000000;
-  font-family: Apple SD Gothic Neo;
+  font-family: sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -80,6 +123,7 @@ const ItemBox = styled.div`
   padding-left: 19px;
   padding-top: 21px;
   background: #ffffff;
+  cursor: pointer;
   & > img {
     width: 70px;
     height: 70px;
@@ -147,4 +191,5 @@ const RealPrice = styled.p`
   font-size: 14px;
   text-decoration-line: line-through;
 `;
+
 export default Items;

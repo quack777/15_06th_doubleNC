@@ -2,16 +2,28 @@ import { useRouter } from 'next/router';
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+interface ContextType {
+  id: string;
+  name: string;
+  discountRate: number;
+  imageUrl: string;
+}
+
 const Category: FC = () => {
-  const [data, setData] = useState<string[] | string>([]);
+
+  const [itemInfo, setItemInfo] = useState<ContextType[]>();
+
   const router = useRouter();
 
   useEffect(() => {
-    const categoryInfo = JSON.parse(router.query.sendData);
-    setData(categoryInfo);
-  }, []);
+    if (router.query.sendData) {
+      const categoryInfo: ContextType[] = JSON.parse(router.query.sendData);
+      setItemInfo(categoryInfo);
+    }
+  }, [router.query.sendData]);
 
-  const categoryButton = (id: number, name: string): void => {
+
+  const categoryButton = (id: string, name: string): void => {
     router.push({ pathname: `/categories/[id]`, query: { categoryName: name } }, `/categories/${id}`);
   };
 
@@ -19,13 +31,13 @@ const Category: FC = () => {
     <TopCategories>
       <CategoriesBox>
         <div>
-          {data?.map((data) => (
+          {itemInfo?.map((item) => (
             <CategoryName
-              key={data.id}
-              active={data.id === Number(router.query.id)}
-              onClick={() => categoryButton(data.id, data.name)}
+              key={item.id}
+              active={item.id == router.query.id}
+              onClick={() => categoryButton(item.id, item.name)}
             >
-              {data.name}
+              {item.name}
             </CategoryName>
           ))}
         </div>
@@ -37,7 +49,6 @@ const Category: FC = () => {
 const TopCategories = styled.section`
   display: flex;
   flex-direction: column;
-  // position: fixed;
   width: 100%;
   max-width: 48rem;
   z-index: 10;
