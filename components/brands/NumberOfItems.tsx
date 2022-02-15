@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-interface Props {
-  count: string;
-}
+
 const NumberOfItems = () => {
   <Container>00개의 상품</Container>;
 };
