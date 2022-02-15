@@ -33,14 +33,14 @@ const Category: FC = ({ data }) => {
   return (
     <CategoryGrid>
       {apiData?.map((data: ContextType) => (
-        <Link key={data.id} href={{ pathname: `/brands/${data.id}`, query: { sendData } }}>
+        <Link key={data.id} href={{ pathname: `/categories/[id]`, query: { sendData } }} as={`/categories/${data.id}`}>
           <DataBox>
             <img src={data.imageUrl} alt="img정보" />
             <p>{data.name}</p>
           </DataBox>
         </Link>
       ))}
-      {/* <Link href={{ pathname: '/brands/[id]', query: { sendData } }} as="/brands/67">
+      {/* <Link href={{ pathname: '/categories/[id]', query: { sendData } }} as="/categories/67">
         <a>까페</a>
       </Link> */}
     </CategoryGrid>

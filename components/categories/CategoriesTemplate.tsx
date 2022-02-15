@@ -11,7 +11,5 @@ const CategoriesTemplate: React.FC = ({ children }) => {
   );
 };
 
-const Container = styled.div`
-  background-color: red;
-`;
+const Container = styled.div``;
 export default CategoriesTemplate;
