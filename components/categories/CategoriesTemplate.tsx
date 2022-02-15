@@ -1,11 +1,9 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import Nav from '../nav/Nav';
-import BottomNav from './BottomNav';
-import List from './List';
 
-const CategoriesTemplate: React.FC = ({ children }) => {
+const CategoriesTemplate: FC = ({ children }) => {
   const router = useRouter();
   console.log('categories router', router);
   return (

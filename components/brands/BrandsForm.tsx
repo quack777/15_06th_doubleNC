@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
-import Category from '../categories/Category';
-import List from '../categories/List';
 import Link from 'next/link';
 import styled from 'styled-components';
 import moneyAddComma from '../utils/moneyAddComma';
+
 const BrandsForm: React.FC = () => {
   const router = useRouter();
   const items = JSON.parse(router.query.data);
@@ -15,7 +14,9 @@ const BrandsForm: React.FC = () => {
 
   return (
     <Container>
-      <Header>{items.length}개의 상품</Header>
+      <Header>
+        <b>{items.length}</b>개의 상품
+      </Header>
       {items.map((data) => (
         <Link key={data.id} href={{ pathname: '/items/[id]', query: { name: data.name } }} as={`/items/${data.id}`}>
           <a>
@@ -54,6 +55,7 @@ const Header = styled.div`
   padding-left: 13px;
   display: flex;
   align-items: center;
+  margin-top: 1px;
   margin-bottom: 9px;
   color: #000000;
 

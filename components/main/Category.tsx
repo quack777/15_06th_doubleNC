@@ -1,7 +1,6 @@
 import axios from 'axios';
 import Link from 'next/link';
 import React, { FC, useEffect, useState } from 'react';
-import { json } from 'stream/consumers';
 import styled from 'styled-components';
 
 interface ContextType {
@@ -11,32 +10,29 @@ interface ContextType {
   imageUrl: string;
 }
 
-const Category: FC = ({ data }) => {
-  // 일단 test => aixos useEffect 사용
-  // categories 페이지에 사용할 categories.name값 전달
-  const [apiData, setApiData] = useState<ContextType[]>();
-  const [sendData, setSendData] = useState<string[]>();
+const Category: FC = () => {
+  const [categoryInfo, setCategoryInfo] = useState<ContextType[] | undefined>();
 
-  const testGetAPi = () => {
-    axios.get('https://api2.ncnc.app/con-category1s').then((res) => {
-      setApiData(res.data.conCategory1s);
-    });
-  };
   useEffect(() => {
-    testGetAPi();
+    const CategoryGetInfo = () => {
+      axios.get('https://api2.ncnc.app/con-category1s').then((res) => {
+        setCategoryInfo(res.data.conCategory1s);
+      });
+    };
+    CategoryGetInfo();
   }, []);
-
-  useEffect(() => {
-    setSendData(apiData?.map((data) => data.name));
-  }, [apiData]);
 
   return (
     <CategoryGrid>
-      {apiData?.map((data: ContextType) => (
+      {categoryInfo?.map((data: ContextType) => (
         <Link
           key={data.id}
-          href={{ pathname: `/categories/[id]`, query: { sendData: JSON.stringify(apiData), categoryName: data.name } }}
+          href={{
+            pathname: `/categories/[id]`,
+            query: { sendData: JSON.stringify(categoryInfo), categoryName: data.name },
+          }}
           as={`/categories/${data.id}`}
+          passHref
         >
           <DataBox>
             <img src={data.imageUrl} alt="img정보" />
@@ -44,9 +40,6 @@ const Category: FC = ({ data }) => {
           </DataBox>
         </Link>
       ))}
-      {/* <Link href={{ pathname: '/categories/[id]', query: { sendData } }} as="/categories/67">
-        <a>까페</a>
-      </Link> */}
     </CategoryGrid>
   );
 };
@@ -65,10 +58,6 @@ const CategoryGrid = styled.div`
 `;
 
 const DataBox = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
   width: 112px;
   height: 94px;
   padding-top: 11px;

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Category from './Category';
 import List from './List';
 
-const CategoriesForm: React.FC = () => {
+const CategoriesForm: FC = () => {
   return (
     <>
       <Category />

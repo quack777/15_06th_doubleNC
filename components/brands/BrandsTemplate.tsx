@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import Nav from '../nav/Nav';
 
-const BrandsTemplate: React.FC = ({ children }) => {
+const BrandsTemplate: FC = ({ children }) => {
   const router = useRouter();
   return (
     <Container>
