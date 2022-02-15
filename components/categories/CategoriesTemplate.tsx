@@ -11,7 +11,6 @@ const CategoriesTemplate: React.FC = ({ children }) => {
   return (
     <Container>
       <Nav name={router.query.categoryName} />
-      <BottomNav />
       {children}
     </Container>
   );
