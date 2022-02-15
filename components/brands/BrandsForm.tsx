@@ -89,7 +89,9 @@ const TextBox = styled.div`
 const Price = styled.div`
   display: flex;
   flex-direction: row;
+
   & > p:nth-child(1) {
+    font-family: sans-serif;
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
@@ -97,12 +99,14 @@ const Price = styled.div`
     margin-right: 9px;
   }
   & > p:nth-child(2) {
+    font-family: sans-serif;
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
     margin-right: 6px;
   }
   & > p:nth-child(3) {
+    font-family: sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
