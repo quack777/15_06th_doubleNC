@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import Link from 'next/link';
 import styled from 'styled-components';
+import Nav from '../nav/Nav';
+import Items from '../main/Items';
 
 const List: React.FC = () => {
   const [data, setData] = useState('');
@@ -21,21 +23,23 @@ const List: React.FC = () => {
   if (data.conCategory1) {
     console.log(data.conCategory1.conCategory2s);
     return (
-      <Container>
-        {data.conCategory1.conCategory2s.map((item: any) => (
-          <BrandButton>
-            <Link
-              href={{ pathname: '/brands/[id]', query: { name: item.name, data: JSON.stringify(item.conItems) } }}
-              as={`/brands/${item.id}`}
-            >
-              <a>
-                <ImageBox id={item.id} src={item.imageUrl} />
-                <TextBox id={item.id}>{item.name}</TextBox>
-              </a>
-            </Link>
-          </BrandButton>
-        ))}
-      </Container>
+      <>
+        <Container>
+          {data.conCategory1.conCategory2s.map((item: any) => (
+            <BrandButton>
+              <Link
+                href={{ pathname: '/brands/[id]', query: { name: item.name, data: JSON.stringify(item.conItems) } }}
+                as={`/brands/${item.id}`}
+              >
+                <a>
+                  <ImageBox id={item.id} src={item.imageUrl} />
+                  <TextBox id={item.id}>{item.name}</TextBox>
+                </a>
+              </Link>
+            </BrandButton>
+          ))}
+        </Container>
+      </>
     );
   } else {
     return null;
