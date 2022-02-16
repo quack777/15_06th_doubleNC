@@ -24,13 +24,7 @@
 |<img width="200px" src='https://avatars.githubusercontent.com/u/66837741?v=4'/>|<img width="200px" src="https://avatars.githubusercontent.com/u/89771577?v=4"/>|<img width="200px" src="https://avatars.githubusercontent.com/u/65222200?v=4"/>|<img width="200px" src='https://avatars.githubusercontent.com/u/89348550?v=4'>|
 ---
 
-## 4. 🔗 배포 링크
-
-[배포 링크 바로가기]()
-
----
-
-## 5. 📄 기능 목록 명세
+## 4. 📄 기능 목록 명세
 
 ### 1. 기능 분배
 
@@ -70,7 +64,7 @@
 
 ---
 
-## 6. 💿 설치 및 실행 방법
+## 5. 💿 설치 및 실행 방법
 
 Project Clone
 
@@ -86,7 +80,7 @@ Project Start For Development
 
 ---
 
-## 7. 🌲 프로젝트 구조
+## 6. 🌲 프로젝트 구조
 
 ```
 📦components
@@ -114,7 +108,7 @@ Project Start For Development
  ┗ 📜_document.tsx
 ```
 
-## 8. 📕 레퍼런스
+## 7. 📕 레퍼런스
 
 - 이 프로젝트는 <u>[원티드 프론트엔드 프리온보딩](https://www.wanted.co.kr/events/pre_onboarding_course_6) 기업 과제를 토대로 만들었습니다.
 - 실무수준의 프로젝트이지만 학습용으로 만들었기 때문에 이 코드를 활용하여 이득을 취하거나 무단 배포할 경우 법적으로 문제될 수 있습니다.
