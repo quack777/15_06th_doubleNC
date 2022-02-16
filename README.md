@@ -37,23 +37,31 @@
 ### 1) **홈/카테고리/브랜드(조은총, 전수현)**
 
 [홈] 
+ ![캐러셀,홈카테고리](https://user-images.githubusercontent.com/89348550/154171582-a546cef6-6891-4648-995d-6487a59592e9.gif)
+ ![땡처리](https://user-images.githubusercontent.com/89348550/154171607-4bfabe55-4086-483d-adfe-1b380ff46920.gif)
 
 - 이미지 슬라이더 구현 (3가지 버튼을 추가 후 버튼을 누를 때마다 지정된 페이지로 이동)
 - 카테고리 테이블 구현 및 링크 기능 추가
 - 땡처리콘 리스트 추가 , 땡처리 API호출로 데이터를 받아온 후 리스트로 출력
 
 [카테고리/브랜드]
+ 
+ ![브랜드 이동](https://user-images.githubusercontent.com/89348550/154171593-85b7254f-f401-41f9-a6e5-f34bd9ce6f50.gif)
+
 
 - 메인 페이지에서 선택된 카테고리 명을 가져와서 카테고리 페이지에 정보 렌더링
 - 비슷한 방식으로 카테고리에 있는 브랜드 명을 클릭하였을 때 brands 주소로 이동함과 동시에 프로퍼티 넘겨주기
 
 
 ### **2) 상품 상세 페이지(최병현)**
+ ![구매하기](https://user-images.githubusercontent.com/89348550/154171633-f3b21491-3c5b-41c9-a66a-66dea1cb1914.gif) 
 
 - getStaticProps 및 getStaticPaths 메서드를 사용하여 상품 상세 정보 페이지 정적 렌더링
 - 현재 가져온 데이터 값에 따라 상세 페이지 정보 동적 랜더링
 
 ### **3) 마이페이지/고객센터(조용우)**
+
+![마이페이지,고객센터](https://user-images.githubusercontent.com/89348550/154171530-ec9b3bc7-c0d6-4c29-bf37-7bc6586dd1f9.gif)
 
 - 메뉴 버튼 클릭 시 Modal창 호출
 - 고객센터 구매,판매 API 호출
